@@ -1,8 +1,8 @@
-import { GXSignalType } from '../contexts/types';
+import { CreateStoreType } from '../helpers/types';
 
 export type GXProviderProps = {
   children: React.ReactElement,
-  store: GXSignalType[]
+  store: CreateStoreType
 }
 
 export type GXAction = {

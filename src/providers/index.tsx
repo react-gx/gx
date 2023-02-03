@@ -1,12 +1,11 @@
 import { useReducer } from "react";
-import GXContext from "../contexts/gxContext";
-import { GXAction, GXProviderProps } from "./types";
+import GXContext from "../contexts";
+import { GXProviderProps } from "./types";
 import gxReducer from "./reducer";
-import { GXSignalType } from "../contexts/types";
 
 const GXProvider = ({ children, store }: GXProviderProps) => {
   // Global state that manage all signals
-  const [signals, dispatch] = useReducer(gxReducer, store);
+  const [signals, dispatch] = useReducer(gxReducer, store.getSignal());
 
   // Context value
   const contextValue = {
