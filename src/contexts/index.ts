@@ -1,7 +1,7 @@
 import { createContext } from "react";
-import { GXContext } from "./types";
+import { GXContextType } from "./types";
 
-const GXContext = createContext<GXContext>({
+const GXContext = createContext<GXContextType>({
   signals: []
 });
 

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
+    "rootDir": "src",
     "target": "ES6",
     "lib": [
       "dom",
@@ -21,7 +22,6 @@
     "noEmit": false,
     "jsx": "react-jsx",
     "declaration": true,
-    "declarationMap": true,
     "sourceMap": true,
   },
   "include": [
@@ -29,7 +29,6 @@
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "public"
+    "dist"
   ]
 }

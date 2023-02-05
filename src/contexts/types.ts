@@ -1,23 +1,23 @@
-export type GXSignalType = {
-  // Index of the signal
-  id: string;
+export type GXSignalType<T = any> = {
+  // Name of the signal
+  name: string;
 
   // State inside the signal
-  state: any,
+  state: T,
 
-  // Actons of the signal
-  actions: GXActionType[]
+  // Actions of the signal
+  actions: GXActionType<T>[]
 }
 
-export type GXActionType = {
+export type GXActionType<T, P = any> = {
   // Represent the type of the action
   type: string,
 
   // The handler function
-  handler: Function
+  handler: (state: T, payload: P) => T
 }
 
-export type GXContext = {
+export type GXContextType = {
   // Signals
   signals: GXSignalType[]
 }
