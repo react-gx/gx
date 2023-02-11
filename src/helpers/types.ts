@@ -7,7 +7,7 @@ export type CreateSignalOptionType<T> = {
 }
 
 export type CreateStoreType = {
-  getSignal: () => GXSignalType[]
+  getSignals: () => GXSignalType[]
 }
 
 export type Action<T> = {

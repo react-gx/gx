@@ -1,6 +1,6 @@
 const createStore = (signals) => {
     return {
-        getSignal: () => signals,
+        getSignals: () => signals,
     };
 };
 export default createStore;

@@ -17,7 +17,18 @@ export type GXActionType<T, P = any> = {
   handler: (state: T, payload: P) => T
 }
 
+export type DispatchedActionType = {
+  // The type of the action
+  type: string,
+
+  // The payload of the action
+  payload: any
+}
+
 export type GXContextType = {
   // Signals
-  signals: GXSignalType[]
+  signals: GXSignalType[],
+
+  // Dispatch
+  dispatch: (action: DispatchedActionType) => void
 }

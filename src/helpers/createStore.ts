@@ -3,7 +3,7 @@ import { CreateStoreType } from "./types";
 
 const createStore = (signals: GXSignalType[]): CreateStoreType => {
   return {
-    getSignal: () => signals,
+    getSignals: () => signals,
   };
 };
 

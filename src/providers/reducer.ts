@@ -1,18 +1,55 @@
-import { GXSignalType } from '../contexts/types';
-import { GXAction } from './types';
+import { GXSignalType } from "../contexts/types";
+import { GXAction } from "./types";
 
-const gxReducer = (state: GXSignalType[], action: GXAction) => {
-  switch (action.type) {
-    case 'add/signal': {
-      const prev = state.slice();
+const gxReducer = (signals: GXSignalType[], action: GXAction) => {
+  // Prev signals
+  const prevSignals = [...signals];
 
-      prev.push(action.payload);
+  // Get the signal name
+  const signalName = action.type.split("/")[0];
 
-      return prev;
-    }
+  // Get the signal
+  const signal = prevSignals.find((signal) => signal.name === signalName);
 
-    default: return state
+  if (!signal) {
+    console.warn(`Signal "${signalName}" not found`);
+
+    return prevSignals;
   }
-}
+  
+  let actionToDispatch = null;
 
-export default gxReducer
+  // Get the action
+  for (let act of signal.actions) {
+    if (act.type === action.type) {
+      actionToDispatch = act;
+
+      break;
+    }
+  }
+
+  console.log(
+    "actionToDispatch founded",
+    actionToDispatch === null ? false : true
+  );
+
+  if (actionToDispatch) {
+    // Display prev state
+    console.log(`Prev state of "${signal.name}" signal:`, signal.state);
+
+    // Display action payload
+    console.log(`Action: `, action.payload);
+
+    // Dispatch the action
+    signal.state = actionToDispatch.handler(signal.state, action.payload);
+
+    // Display new state
+    console.log(`New state of "${signal.name}" signal:`, signal.state);
+  } else {
+    console.warn(`Action "${action.type}" not found`);
+  }
+
+  return prevSignals;
+};
+
+export default gxReducer;
