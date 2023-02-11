@@ -17,12 +17,11 @@ const gxReducer = (signals, action) => {
             break;
         }
     }
-    console.log("actionToDispatch founded", actionToDispatch === null ? false : true);
     if (actionToDispatch) {
         // Display prev state
         console.log(`Prev state of "${signal.name}" signal:`, signal.state);
         // Display action payload
-        console.log(`Action: `, action.payload);
+        console.log(`Action payload: `, action.payload);
         // Dispatch the action
         signal.state = actionToDispatch.handler(signal.state, action.payload);
         // Display new state
