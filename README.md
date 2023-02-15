@@ -281,6 +281,7 @@ const { increment, decrement } = useAction("counter");
 ## Contributing
 
 Contributions, issues and feature requests are welcome!
+See the [Contributing Guide](./CONTRIBUTING.md).
 
 ## Keywords
 
