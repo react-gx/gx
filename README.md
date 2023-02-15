@@ -1,6 +1,6 @@
 # GX - Global State Management for React Applications
 
-[logo]("./assets/logo.png")
+![logo](./assets/logo.png)
 
 This library aims to provide you an `easy` and `fast` way to set up and manage the global state of your **`react`** application.
 
@@ -58,5 +58,8 @@ For structuring your code very well you have to follow these steps.
 - Inside the signals directory you will create files that will contains your state declaration with actions that act to this state. (`eg`: **counter.js** for exemple)
 - Inside the store directory, just create an index.js file. We will see how to fill it.
 
-[structure]("./assets/structure.png")
+
+Here is the result.
+
+![structure](./assets/structure.png)
 
