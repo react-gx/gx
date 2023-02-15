@@ -1,3 +1,5 @@
+import { GXAction } from "../providers/types";
+
 export type GXSignalType<T = any> = {
   // Name of the signal
   name: string;
@@ -30,5 +32,5 @@ export type GXContextType = {
   signals: GXSignalType[],
 
   // Dispatch
-  dispatch: (action: DispatchedActionType) => void
+  dispatch: React.Dispatch<GXAction>
 }
