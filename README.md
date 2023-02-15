@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# GX - Global State Management for React Applications
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[logo]("./assets/logo.png")
 
-## Available Scripts
+This library aims to provide you an `easy` and `fast` way to set up and manage the global state of your **`react`** application.
 
-In the project directory, you can run:
+## Installation
 
-### `yarn start`
+You can use `npm` or `yarn` to install this library into your react application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Using npm
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm install gx
+```
 
-### `yarn test`
+### Using yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+yarn add gx
+```
 
-### `yarn build`
+## Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This library doesn't work properly in strict mode. So to avoid some issues, please disable strict mode in your react application first before using it.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Definition of concepts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**GX** comes with some new concepts like `signal`, `action` and `store`.
 
-### `yarn eject`
+### Signal
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Signal** represent a specific state that your application has to manage.
+For example, for managing users and products inside your ecommerce application you will have to create two separate signals called `usersSignal` and `productsSignal`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For handle it, there is a special `createSignal` function for this case.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Action
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Actions** represent functions that act to the state and make it changing over the time. 
 
-## Learn More
+Your have to specify these `actions` when you create yours `signals`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Store
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Store** is a collection of `signals`. We know that in an application, we can manage many state separately, so `gx` gives you the possibility to centralize all your state into a special place. The state becomes easier to manage like that.
+
+For handle it, there is a special `createStore` function for this case, which takes an array of `signals`.
+
+## Usage
+
+### First step: Setting up the code structure.
+
+For structuring your code very well you have to follow these steps.
+
+- Create a directory called `gx` or whatever you want inside the `src` directory
+- Inside the `gx` directory, create two others one called `signals` and `store`.
+- Inside the signals directory you will create files that will contains your state declaration with actions that act to this state. (`eg`: **counter.js** for exemple)
+- Inside the store directory, just create an index.js file. We will see how to fill it.
+
+[structure]("./assets/structure.png")
+
