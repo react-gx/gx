@@ -1,5 +1,12 @@
 # GX - Global State Management for React Applications
 
+`React` and `React Native` Library for managing global state.
+
+[![npm version](https://badge.fury.io/js/%40dilane3%2Fgx.svg)](https://badge.fury.io/js/%40dilane3%2Fgx)
+[![npm downloads](https://img.shields.io/npm/dm/%40dilane3%2Fgx)](https://www.npmjs.com/package/@dilane3/gx)
+[![GitHub license](https://img.shields.io/github/license/react-gx/gx)](https://github.com/react-gx/gx/blob/main/LICENCE)
+
+
 ![logo](./assets/logo.png)
 
 This library aims to provide you an `easy` and `fast` way to set up and manage the global state of your **`react`** application.
@@ -11,13 +18,13 @@ You can use `npm` or `yarn` to install this library into your react application.
 ### Using npm
 
 ```bash
-npm install gx
+npm install @dilane3/gx
 ```
 
 ### Using yarn
 
 ```bash
-yarn add gx
+yarn add @dilane3/gx
 ```
 
 ## Prerequisites
@@ -113,7 +120,7 @@ Here is the result.
 Inside the `signals` directory, create a file called `counter.js` for example.
 
 ```js
-import { createSignal } from 'gx';
+import { createSignal } from '@dilane3/gx';
 
 const counterSignal = createSignal({
   name: 'counter',
@@ -137,7 +144,7 @@ export default counterSignal;
 Inside the `store` directory, create an `index.js` file.
 
 ```js
-import { createStore } from "gx";
+import { createStore } from "@dilane3/gx";
 import counterSignal from "../signals/counter";
 
 export default createStore([counterSignal]);
@@ -150,7 +157,7 @@ Inside your `App.js` file, import your store and wrap your application with the 
 ```js
 import React from "react";
 import store from "./gx/store";
-import GXProvider from "gx";
+import GXProvider from "@dilane3/gx";
 
 function App() {
   return (
@@ -172,7 +179,7 @@ Create a component called `Counter` inside the Counter.js file. Then import two 
 
 ```js
 import React from "react";
-import { useSignal, useAction } from "gx";
+import { useSignal, useAction } from "@dilane3/gx";
 
 function Counter() {
   // State
@@ -285,4 +292,4 @@ See the [Contributing Guide](./CONTRIBUTING.md).
 
 ## Keywords
 
-react, state, management, hooks, gx 
+react, state, management, hooks, gx, dilane3 
