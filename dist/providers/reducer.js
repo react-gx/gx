@@ -5,10 +5,8 @@ const gxReducer = (signals, action) => {
     const signalName = action.type.split("/")[0];
     // Get the signal
     const signal = prevSignals.find((signal) => signal.name === signalName);
-    if (!signal) {
-        console.warn(`Signal "${signalName}" not found`);
-        return prevSignals;
-    }
+    if (!signal)
+        throw new Error(`Signal "${signalName}" not found`);
     let actionToDispatch = null;
     // Get the action
     for (let act of signal.actions) {
@@ -21,9 +19,8 @@ const gxReducer = (signals, action) => {
         // Dispatch the action
         signal.state = actionToDispatch.handler(signal.state, action.payload);
     }
-    else {
-        console.warn(`Action "${action.type}" not found`);
-    }
+    else
+        throw new Error(`Action "${action.type}" not found`);
     return prevSignals;
 };
 export default gxReducer;

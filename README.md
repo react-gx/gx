@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/%40dilane3%2Fgx.svg)](https://badge.fury.io/js/%40dilane3%2Fgx)
 [![npm downloads](https://img.shields.io/npm/dm/%40dilane3%2Fgx)](https://www.npmjs.com/package/@dilane3/gx)
-[![GitHub license](https://img.shields.io/github/license/react-gx/gx)](https://github.com/react-gx/gx/blob/main/LICENCE)
+[![GitHub license](https://img.shields.io/github/license/react-gx/gx)](https://github.com/react-gx/gx/blob/main/LICENSE)
 
 
 ![logo](./assets/logo.png)
