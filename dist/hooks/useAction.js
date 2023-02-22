@@ -12,7 +12,6 @@ const useAction = (signalName, ...actions) => {
     const handleGetActions = (signalName) => {
         const signal = signals.find((signal) => signal.name === signalName);
         if (signal) {
-            console.log("actions", actions);
             if (!actions || actions.length === 0)
                 return signal.actions;
             const filteredActions = [];
@@ -45,7 +44,6 @@ const useAction = (signalName, ...actions) => {
                 });
             };
         }
-        console.log("nonFormattedActions", nonFormattedActions);
         // If actions are more than one
         // Formatted actions
         const formattedActions = {};
