@@ -1,6 +1,6 @@
 {
-  "name": "gx",
-  "version": "1.0.1",
+  "name": "@dilane3/gx",
+  "version": "1.1.0",
   "private": false,
   "license": "MIT",
   "main": "dist/index.js",
@@ -33,6 +33,20 @@
     "build": "tsc",
     "test": "react-scripts test"
   },
+  "keywords": [
+    "react",
+    "react-gx",
+    "gx",
+    "redux",
+    "zustand",
+    "mobx",
+    "management",
+    "state",
+    "state-management",
+    "react-state-management",
+    "global",
+    "global-state"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",

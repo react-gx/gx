@@ -47,6 +47,8 @@ function App() {
     </StrictMode>
   );
 }
+
+export default App;
 ```
 
 **After**
@@ -63,6 +65,8 @@ function App() {
     </Fragment>
   );
 }
+
+export default App;
 ```
 
 ### Disabling strict mode on Next.js
@@ -199,6 +203,8 @@ function Counter() {
     </div>
   );
 }
+
+export default Counter;
 ```
 
 Note that the `useSignal` hook takes the name of the signal as a parameter and return the state contained inside that signal. 
@@ -268,10 +274,27 @@ const counter = useSignal("counter");
 
 ### `useAction`
 
-This hook takes the name of the signal as a parameter and returns an object that contains all the actions of this signal.
+This hook takes the name of the signal as a the first parameter and returns an object that contains all the actions of this signal.
 
 ```js
 const { increment, decrement } = useAction("counter");
+```
+
+**`New in version 1.1.0`**
+
+Note that, the `useAction` hook can accept a second parameter which is the list of actions that you want to use. If you don't specify the second parameter, all the actions of the signal will be returned.
+
+There is another thing that you have to know.
+If you provide only one action as a second parameter, the hook will return only the action itself and not an object that contains the action.
+
+```js
+const increment = useAction("counter", "increment");
+```
+
+And if you provide more than one action, the hook will return an object that contains all the actions provided.
+
+```js
+const { increment, decrement } = useAction("counter", "increment", "decrement");
 ```
 
 ## License
@@ -289,7 +312,3 @@ const { increment, decrement } = useAction("counter");
 
 Contributions, issues and feature requests are welcome!
 See the [Contributing Guide](./CONTRIBUTING.md).
-
-## Keywords
-
-react, state, management, hooks, gx, dilane3 
