@@ -1,9 +1,21 @@
 {
-  "name": "gx",
-  "version": "1.0.0",
+  "name": "@dilane3/gx",
+  "version": "1.1.0",
   "private": false,
   "license": "MIT",
   "main": "dist/index.js",
+  "author": {
+    "name": "dilane3",
+    "email": "komboudilane125@gmail.com",
+    "url": "https://dilane3.com",
+    "twitter": "https://twitter.com/dilanekombou",
+    "github": "https://github.com/dilane3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-gx/gx",
+    "issues": "https://github.com/react-gx/gx/issues"
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -15,12 +27,26 @@
     "typescript": "^4.4.2"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "^18.0.0"
   },
   "scripts": {
     "build": "tsc",
     "test": "react-scripts test"
   },
+  "keywords": [
+    "react",
+    "react-gx",
+    "gx",
+    "redux",
+    "zustand",
+    "mobx",
+    "management",
+    "state",
+    "state-management",
+    "react-state-management",
+    "global",
+    "global-state"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
