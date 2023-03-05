@@ -11,6 +11,12 @@
 
 This library aims to provide you an `easy` and `fast` way to set up and manage the global state of your **`react`** application.
 
+## Documentation
+
+You can read the entire [documentation](https://gx.dilane3.com) and see how to use this library perfectly.
+
+But, If you want to start directly with the library continue reading this small documentation here.
+
 ## Installation
 
 You can use `npm` or `yarn` to install this library into your react application.
