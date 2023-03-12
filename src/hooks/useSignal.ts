@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 import GXContext from "../contexts";
 
-const useSignal = (signalName: string) => {
+const useSignal = <T = any>(signalName: string) => {
   const { signals } = useContext(GXContext);
   const memoizedSignals = useMemo(() => signals, [signals]);
 
@@ -10,7 +10,7 @@ const useSignal = (signalName: string) => {
    * @param signalName 
    * @returns 
    */
-  const handleGetSignalState = (signalName: string) => {
+  const handleGetSignalState = (signalName: string): T => {
     const signal = memoizedSignals.find(signal => signal.name === signalName);
 
     if (signal) {

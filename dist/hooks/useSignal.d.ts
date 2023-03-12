@@ -1,2 +1,2 @@
-declare const useSignal: (signalName: string) => any;
+declare const useSignal: <T = any>(signalName: string) => T;
 export default useSignal;

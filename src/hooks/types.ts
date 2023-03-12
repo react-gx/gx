@@ -1,3 +1,3 @@
-export type Action = {
+export type Actions = {
   [key: string]: (payload: any) => void
 }
