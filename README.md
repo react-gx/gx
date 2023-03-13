@@ -7,7 +7,8 @@
 [![GitHub license](https://img.shields.io/github/license/react-gx/gx)](https://github.com/react-gx/gx/blob/main/LICENSE)
 
 
-![logo](./assets/logo.png)
+![logo](https://lh4.googleusercontent.com/k2V9Oh-tfABeDjwovtMUqE-lt6cULH0c1EFgb-XNTFh1lt5DVGTGhl3Ty3fMF3xhCBY=w2400)
+
 
 This library aims to provide you an `easy` and `fast` way to set up and manage the global state of your **`react`** application.
 
@@ -123,7 +124,7 @@ For structuring your code very well you have to follow these steps.
 
 Here is the result.
 
-![structure](./assets/structure.png)
+![structure](https://lh3.googleusercontent.com/_z_JTStNFHyXTmjz4GrcphAN6BC_CeKYxN1zwyxWGC-ujpIcVTqthesXT6Lfe8b4t1M=w2400)
 
 ### Second step: Creating your signals.
 
