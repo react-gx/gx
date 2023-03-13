@@ -7,7 +7,8 @@
 [![GitHub license](https://img.shields.io/github/license/react-gx/gx)](https://github.com/react-gx/gx/blob/main/LICENSE)
 
 
-![logo](./assets/logo.png)
+![logo](https://lh4.googleusercontent.com/k2V9Oh-tfABeDjwovtMUqE-lt6cULH0c1EFgb-XNTFh1lt5DVGTGhl3Ty3fMF3xhCBY=w2400)
+
 
 This library aims to provide you an `easy` and `fast` way to set up and manage the global state of your **`react`** application.
 
@@ -123,7 +124,7 @@ For structuring your code very well you have to follow these steps.
 
 Here is the result.
 
-![structure](./assets/structure.png)
+![structure](https://lh3.googleusercontent.com/_z_JTStNFHyXTmjz4GrcphAN6BC_CeKYxN1zwyxWGC-ujpIcVTqthesXT6Lfe8b4t1M=w2400)
 
 ### Second step: Creating your signals.
 
@@ -184,19 +185,19 @@ export default App;
 
 ### Fifth step: Using your signals.
 
-Create a component called `Counter` inside the Counter.js file. Then import two hooks from `gx` called `useSignal` and `useAction` like follow.
+Create a component called `Counter` inside the Counter.js file. Then import two hooks from `gx` called `useSignal` and `useActions` like follow.
 
 
 ```js
 import React from "react";
-import { useSignal, useAction } from "@dilane3/gx";
+import { useSignal, useActions } from "@dilane3/gx";
 
 function Counter() {
   // State
   const counter = useSignal("counter");
 
   // Actions
-  const { increment, decrement } = useAction("counter");
+  const { increment, decrement } = useActions("counter");
 
   return (
     <div>
@@ -278,30 +279,29 @@ This hook takes the name of the signal as a parameter and returns the state cont
 const counter = useSignal("counter");
 ```
 
-### `useAction`
+### `useActions`
 
 This hook takes the name of the signal as a the first parameter and returns an object that contains all the actions of this signal.
 
 ```js
-const { increment, decrement } = useAction("counter");
+const { increment, decrement } = useActions("counter");
 ```
 
-**`New in version 1.1.0`**
+### `useAction`
 
-Note that, the `useAction` hook can accept a second parameter which is the list of actions that you want to use. If you don't specify the second parameter, all the actions of the signal will be returned.
-
-There is another thing that you have to know.
-If you provide only one action as a second parameter, the hook will return only the action itself and not an object that contains the action.
+This hook takes the name of the signal as the first parameter and the name of the action as the second one and then return that action.
 
 ```js
 const increment = useAction("counter", "increment");
 ```
 
-And if you provide more than one action, the hook will return an object that contains all the actions provided.
+See more on the [documentation](https://gx.dilane3.com/docs/guide/hooks/useAction)
 
-```js
-const { increment, decrement } = useAction("counter", "increment", "decrement");
-```
+## TypeScript Support
+
+`GX` support TypeScript, so that you can use it directly into your application.
+
+See how to integrate it on the [documentation](https://gx.dilane3.com/docs/typescript) website
 
 ## License
 

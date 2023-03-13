@@ -1,20 +1,6 @@
-import createSignal from "../helpers/createSignal";
+import counterSignal from "./gx/signals/counter";
 
 test("should create a signal", () => {
-  const counterSignal = createSignal({
-    name: "counter",
-    state: 0,
-    actions: {
-      increment: (state, payload) => {
-        return state + payload;
-      },
-
-      decrement: (state, payload) => {
-        return state + payload;
-      },
-    },
-  });
-
   // Expectations
   expect(counterSignal).not.toBeNull();
   expect(counterSignal.name).toEqual("counter");
