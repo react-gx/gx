@@ -303,6 +303,12 @@ And if you provide more than one action, the hook will return an object that con
 const { increment, decrement } = useAction("counter", "increment", "decrement");
 ```
 
+## TypeScript Support
+
+`GX` support TypeScript, so that you can use it directly into your application.
+
+See how to integrate it on the [documentation](https://gx.dilane3.com/docs/typescript) website
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
