@@ -1,49 +1,61 @@
 import { useContext } from "react";
 import GXContext from "../contexts";
-const useActions = (signalName, ...actions) => {
+var useActions = function (signalName) {
+    var actions = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        actions[_i - 1] = arguments[_i];
+    }
     if (!signalName || typeof signalName !== "string")
         throw new Error("Provide a signalName as first argument of useActions");
     // Get Global Context
-    const { signals, dispatch } = useContext(GXContext);
+    var _a = useContext(GXContext), signals = _a.signals, dispatch = _a.dispatch;
     // Some handlers
     /**
      * Get actions of a signal
      * @param signalName
      * @returns
      */
-    const handleGetActions = (signalName) => {
-        const signal = signals.find((signal) => signal.name === signalName);
+    var handleGetActions = function (signalName) {
+        var signal = signals.find(function (signal) { return signal.name === signalName; });
         if (signal) {
             if (!actions || actions.length === 0)
                 return signal.actions;
-            const filteredActions = [];
-            for (let action of actions) {
-                const actionName = `${signalName}/${action}`;
-                const retrievedAction = signal.actions.find((act) => act.type === actionName);
+            var filteredActions = [];
+            var _loop_1 = function (action) {
+                var actionName = "".concat(signalName, "/").concat(action);
+                var retrievedAction = signal.actions.find(function (act) { return act.type === actionName; });
                 if (retrievedAction)
                     filteredActions.push(retrievedAction);
                 else
-                    throw new Error(`Action ${actionName} not found`);
+                    throw new Error("Action ".concat(actionName, " not found"));
+            };
+            for (var _i = 0, actions_1 = actions; _i < actions_1.length; _i++) {
+                var action = actions_1[_i];
+                _loop_1(action);
             }
             return filteredActions;
         }
         else
-            throw new Error(`Signal ${signalName} not found`);
+            throw new Error("Signal ".concat(signalName, " not found"));
     };
-    const handleFormatActions = () => {
+    var handleFormatActions = function () {
         // Get actions
-        const nonFormattedActions = handleGetActions(signalName);
+        var nonFormattedActions = handleGetActions(signalName);
         // Formatted actions
-        const formattedActions = {};
-        for (const action of nonFormattedActions) {
+        var formattedActions = {};
+        var _loop_2 = function (action) {
             // Get action name
-            const actionName = action.type.split("/")[1];
-            formattedActions[actionName] = (payload) => {
+            var actionName = action.type.split("/")[1];
+            formattedActions[actionName] = function (payload) {
                 dispatch({
                     type: action.type,
-                    payload,
+                    payload: payload,
                 });
             };
+        };
+        for (var _i = 0, nonFormattedActions_1 = nonFormattedActions; _i < nonFormattedActions_1.length; _i++) {
+            var action = nonFormattedActions_1[_i];
+            _loop_2(action);
         }
         return formattedActions;
     };

@@ -1,7 +1,7 @@
 import { createContext } from "react";
-const GXContext = createContext({
+var GXContext = createContext({
     signals: [],
-    dispatch: () => { }
+    dispatch: function () { }
 });
 export default GXContext;
 //# sourceMappingURL=index.js.map

@@ -1,9 +1,10 @@
 {
   "name": "@dilane3/gx",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "private": false,
   "license": "MIT",
   "main": "dist/index.js",
+  "type": "module",
   "author": {
     "name": "dilane3",
     "email": "komboudilane125@gmail.com",

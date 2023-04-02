@@ -1,15 +1,25 @@
-const gxReducer = (signals, action) => {
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+var gxReducer = function (signals, action) {
     // Prev signals
-    const prevSignals = [...signals];
+    var prevSignals = __spreadArray([], signals, true);
     // Get the signal name
-    const signalName = action.type.split("/")[0];
+    var signalName = action.type.split("/")[0];
     // Get the signal
-    const signal = prevSignals.find((signal) => signal.name === signalName);
+    var signal = prevSignals.find(function (signal) { return signal.name === signalName; });
     if (!signal)
-        throw new Error(`Signal "${signalName}" not found`);
-    let actionToDispatch = null;
+        throw new Error("Signal \"".concat(signalName, "\" not found"));
+    var actionToDispatch = null;
     // Get the action
-    for (let act of signal.actions) {
+    for (var _i = 0, _a = signal.actions; _i < _a.length; _i++) {
+        var act = _a[_i];
         if (act.type === action.type) {
             actionToDispatch = act;
             break;
@@ -20,7 +30,7 @@ const gxReducer = (signals, action) => {
         signal.state = actionToDispatch.handler(signal.state, action.payload);
     }
     else
-        throw new Error(`Action "${action.type}" not found`);
+        throw new Error("Action \"".concat(action.type, "\" not found"));
     return prevSignals;
 };
 export default gxReducer;

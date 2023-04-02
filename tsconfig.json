@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "target": "ES6",
+    "target": "ES5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -29,6 +29,7 @@
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "src/tests"
   ]
 }
