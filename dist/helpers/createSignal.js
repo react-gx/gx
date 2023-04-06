@@ -1,26 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Create a signal with a state and actions for managing this state
  * @param options
  * @returns
  */
-var createSignal = function (options) {
-    var actions = [];
+const createSignal = (options) => {
+    const actions = [];
     // Convert the actions object to an array
-    var actionsTable = Object.entries(options.actions);
-    for (var _i = 0, actionsTable_1 = actionsTable; _i < actionsTable_1.length; _i++) {
-        var action = actionsTable_1[_i];
+    const actionsTable = Object.entries(options.actions);
+    for (let action of actionsTable) {
         actions.push({
-            type: "".concat(options.name, "/").concat(action[0]),
+            type: `${options.name}/${action[0]}`,
             handler: action[1]
         });
     }
     // Create a signal
-    var signal = {
+    const signal = {
         name: options.name,
         state: options.state,
-        actions: actions
+        actions
     };
     return signal;
 };
-export default createSignal;
+exports.default = createSignal;
 //# sourceMappingURL=createSignal.js.map

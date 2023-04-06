@@ -1,28 +1,22 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-import { jsx as _jsx } from "react/jsx-runtime";
-import { useReducer } from "react";
-import GXContext from "../contexts";
-import gxReducer from "./reducer";
-export default function GXProvider(_a) {
-    var children = _a.children, store = _a.store;
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
+const contexts_1 = __importDefault(require("../contexts"));
+const reducer_1 = __importDefault(require("./reducer"));
+function GXProvider({ children, store }) {
     // Global state that manage all signals
-    var _b = useReducer(gxReducer, store.getSignals()), signals = _b[0], dispatch = _b[1];
+    const [signals, dispatch] = (0, react_1.useReducer)(reducer_1.default, store.getSignals());
     // Context value
-    var contextValue = {
-        signals: signals,
-        dispatch: dispatch,
+    const contextValue = {
+        signals,
+        dispatch,
     };
-    return (_jsx(GXContext.Provider, __assign({ value: contextValue }, { children: children })));
+    return ((0, jsx_runtime_1.jsx)(contexts_1.default.Provider, Object.assign({ value: contextValue }, { children: children })));
 }
+exports.default = GXProvider;
 ;
 //# sourceMappingURL=index.js.map

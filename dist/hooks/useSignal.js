@@ -1,22 +1,27 @@
-import { useContext, useMemo } from "react";
-import GXContext from "../contexts";
-var useSignal = function (signalName) {
-    var signals = useContext(GXContext).signals;
-    var memoizedSignals = useMemo(function () { return signals; }, [signals]);
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = require("react");
+const contexts_1 = __importDefault(require("../contexts"));
+const useSignal = (signalName) => {
+    const { signals } = (0, react_1.useContext)(contexts_1.default);
+    const memoizedSignals = (0, react_1.useMemo)(() => signals, [signals]);
     /**
      * Get state of a signal base on its name
      * @param signalName
      * @returns
      */
-    var handleGetSignalState = function (signalName) {
-        var signal = memoizedSignals.find(function (signal) { return signal.name === signalName; });
+    const handleGetSignalState = (signalName) => {
+        const signal = memoizedSignals.find(signal => signal.name === signalName);
         if (signal) {
             return signal.state;
         }
         // Throw error if signal not found
-        throw new Error("Signal ".concat(signalName, " not found"));
+        throw new Error(`Signal ${signalName} not found`);
     };
     return handleGetSignalState(signalName);
 };
-export default useSignal;
+exports.default = useSignal;
 //# sourceMappingURL=useSignal.js.map
