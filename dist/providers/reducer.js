@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const gxReducer = (signals, action) => {
     // Prev signals
     const prevSignals = [...signals];
@@ -23,5 +25,5 @@ const gxReducer = (signals, action) => {
         throw new Error(`Action "${action.type}" not found`);
     return prevSignals;
 };
-export default gxReducer;
+exports.default = gxReducer;
 //# sourceMappingURL=reducer.js.map

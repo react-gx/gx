@@ -1,10 +1,15 @@
-import { useContext } from "react";
-import GXContext from "../contexts";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = require("react");
+const contexts_1 = __importDefault(require("../contexts"));
 const useActions = (signalName, ...actions) => {
     if (!signalName || typeof signalName !== "string")
         throw new Error("Provide a signalName as first argument of useActions");
     // Get Global Context
-    const { signals, dispatch } = useContext(GXContext);
+    const { signals, dispatch } = (0, react_1.useContext)(contexts_1.default);
     // Some handlers
     /**
      * Get actions of a signal
@@ -49,5 +54,5 @@ const useActions = (signalName, ...actions) => {
     };
     return handleFormatActions();
 };
-export default useActions;
+exports.default = useActions;
 //# sourceMappingURL=useActions.js.map

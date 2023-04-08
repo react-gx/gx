@@ -1,9 +1,10 @@
 {
   "name": "@dilane3/gx",
-  "version": "1.2.1",
+  "version": "1.2.5",
   "private": false,
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "cjs/index.js",
+  "type": "commonjs",
   "author": {
     "name": "dilane3",
     "email": "komboudilane125@gmail.com",
@@ -17,6 +18,10 @@
     "issues": "https://github.com/react-gx/gx/issues"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "@babel/preset-env": "^7.21.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -31,7 +36,7 @@
     "react": "^18.0.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npx babel dist --out-dir cjs --extensions '.js' --source-maps inline --copy-files",
     "test": "react-scripts test",
     "deploy": "npm publish --access public"
   },

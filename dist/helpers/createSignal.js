@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Create a signal with a state and actions for managing this state
  * @param options
@@ -21,5 +23,5 @@ const createSignal = (options) => {
     };
     return signal;
 };
-export default createSignal;
+exports.default = createSignal;
 //# sourceMappingURL=createSignal.js.map

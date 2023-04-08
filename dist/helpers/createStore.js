@@ -1,7 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const createStore = (signals) => {
     return {
         getSignals: () => signals,
     };
 };
-export default createStore;
+exports.default = createStore;
 //# sourceMappingURL=createStore.js.map

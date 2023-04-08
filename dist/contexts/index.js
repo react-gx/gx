@@ -1,7 +1,9 @@
-import { createContext } from "react";
-const GXContext = createContext({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = require("react");
+const GXContext = (0, react_1.createContext)({
     signals: [],
     dispatch: () => { }
 });
-export default GXContext;
+exports.default = GXContext;
 //# sourceMappingURL=index.js.map

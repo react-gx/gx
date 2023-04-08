@@ -1,8 +1,13 @@
-import { useContext, useMemo } from "react";
-import GXContext from "../contexts";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = require("react");
+const contexts_1 = __importDefault(require("../contexts"));
 const useSignal = (signalName) => {
-    const { signals } = useContext(GXContext);
-    const memoizedSignals = useMemo(() => signals, [signals]);
+    const { signals } = (0, react_1.useContext)(contexts_1.default);
+    const memoizedSignals = (0, react_1.useMemo)(() => signals, [signals]);
     /**
      * Get state of a signal base on its name
      * @param signalName
@@ -18,5 +23,5 @@ const useSignal = (signalName) => {
     };
     return handleGetSignalState(signalName);
 };
-export default useSignal;
+exports.default = useSignal;
 //# sourceMappingURL=useSignal.js.map
