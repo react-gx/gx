@@ -51,7 +51,7 @@ const useActions = (signalName: string, ...actions: string[]) => {
       // Get action name
       const actionName = action.type.split("/")[1];
 
-      formattedActions[actionName] = (payload: any) => {
+      formattedActions[actionName] = (payload?: any) => {
         dispatch({
           type: action.type,
           payload,

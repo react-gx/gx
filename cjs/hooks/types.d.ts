@@ -1,3 +1,3 @@
 export type Actions = {
-    [key: string]: (payload: any) => void;
+    [key: string]: (payload?: any) => void;
 };
