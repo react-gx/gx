@@ -8,7 +8,10 @@ export type GXSignalType<T = any> = {
   state: T,
 
   // Actions of the signal
-  actions: GXActionType<T>[]
+  actions: GXActionType<T>[],
+
+  // Operation of the signal
+  operations?: GXOperationType<T>[]
 }
 
 export type GXActionType<T, P = any> = {
@@ -17,6 +20,14 @@ export type GXActionType<T, P = any> = {
 
   // The handler function
   handler: (state: T, payload: P) => T
+}
+
+export type GXOperationType<T, P = any, Q = any> = {
+  // Represent the type of the operation
+  type: string,
+
+  // The handle function
+  handler: (state: T, payload: P) => Q
 }
 
 export type DispatchedActionType = {

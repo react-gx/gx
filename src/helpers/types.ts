@@ -4,6 +4,7 @@ export type CreateSignalOptionType<T> = {
   name: string;
   state: T;
   actions: Action<T>;
+  operations?: Operation<T>;
 }
 
 export type CreateStoreType = {
@@ -12,4 +13,8 @@ export type CreateStoreType = {
 
 export type Action<T> = {
   [key: string]: (state: T, payload: any) => T
+}
+
+export type Operation<T> = {
+  [key: string]: (state: T, payload?: any) => any
 }
