@@ -7,7 +7,7 @@ const useOperations = (signalName: string) => {
   const { signals } = useContext(GXContext);
 
   if (!signalName || typeof signalName !== "string")
-    throw new Error("Provide a signalName as a first argument of useAction");
+    throw new Error("Provide a signalName as a first argument of useOperations");
 
   const handleFormatOperations = () => {
     const signal = signals.find((signal) => signal.name === signalName);
