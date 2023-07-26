@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
-const contexts_1 = __importDefault(require("../contexts"));
+const index_js_1 = __importDefault(require("../contexts/index.js"));
 const useActions = (signalName, ...actions) => {
     if (!signalName || typeof signalName !== "string")
         throw new Error("Provide a signalName as first argument of useActions");
     // Get Global Context
-    const { signals, dispatch } = (0, react_1.useContext)(contexts_1.default);
+    const { signals, dispatch } = (0, react_1.useContext)(index_js_1.default);
     // Some handlers
     /**
      * Get actions of a signal

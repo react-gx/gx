@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import GXContext from "../contexts";
-import { GXActionType } from "../contexts/types";
-import { Actions } from "./types";
+import GXContext from "../contexts/index.js";
+import { GXActionType } from "../contexts/types.js";
+import { Actions } from "./types.js";
 
-const useActions = (signalName: string, ...actions: string[]) => {
+const useActions = <T = Actions>(signalName: string, ...actions: string[]) => {
   if (!signalName || typeof signalName !== "string")
     throw new Error("Provide a signalName as first argument of useActions");
 
@@ -40,18 +40,18 @@ const useActions = (signalName: string, ...actions: string[]) => {
     } else throw new Error(`Signal ${signalName} not found`);
   };
 
-  const handleFormatActions = () => {
+  const handleFormatActions = (): T => {
     // Get actions
     const nonFormattedActions = handleGetActions(signalName);
 
     // Formatted actions
-    const formattedActions: Actions = {};
+    const formattedActions = {} as any;
 
     for (const action of nonFormattedActions) {
       // Get action name
       const actionName = action.type.split("/")[1];
 
-      formattedActions[actionName] = (payload: any) => {
+      formattedActions[actionName] = (payload?: any) => {
         dispatch({
           type: action.type,
           payload,

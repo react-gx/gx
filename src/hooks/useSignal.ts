@@ -1,5 +1,5 @@
 import { useContext, useMemo } from "react";
-import GXContext from "../contexts";
+import GXContext from "../contexts/index.js";
 
 const useSignal = <T = any>(signalName: string) => {
   const { signals } = useContext(GXContext);

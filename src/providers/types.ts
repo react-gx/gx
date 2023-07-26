@@ -1,4 +1,4 @@
-import { CreateStoreType } from '../helpers/types';
+import { CreateStoreType } from '../helpers/types.js';
 
 export type GXProviderProps = {
   children: React.ReactElement,
