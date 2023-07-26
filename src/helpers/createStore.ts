@@ -1,5 +1,5 @@
-import { GXSignalType } from "../contexts/types";
-import { CreateStoreType } from "./types";
+import { GXSignalType } from "../contexts/types.js";
+import { CreateStoreType } from "./types.js";
 
 const createStore = (signals: GXSignalType[]): CreateStoreType => {
   return {

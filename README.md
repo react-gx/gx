@@ -6,9 +6,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/%40dilane3%2Fgx)](https://www.npmjs.com/package/@dilane3/gx)
 [![GitHub license](https://img.shields.io/github/license/react-gx/gx)](https://github.com/react-gx/gx/blob/main/LICENSE)
 
-
 ![logo](https://lh4.googleusercontent.com/k2V9Oh-tfABeDjwovtMUqE-lt6cULH0c1EFgb-XNTFh1lt5DVGTGhl3Ty3fMF3xhCBY=w2400)
-
 
 This library aims to provide you an `easy` and `fast` way to set up and manage the global state of your **`react`** application.
 
@@ -48,7 +46,7 @@ import React, { StrictMode } from "react";
 function App() {
   return (
     <StrictMode>
-      { 
+      {
         // Your application here
       }
     </StrictMode>
@@ -66,7 +64,7 @@ import React, { Fragment } from "react";
 function App() {
   return (
     <Fragment>
-      { 
+      {
         // Your application here
       }
     </Fragment>
@@ -86,10 +84,9 @@ module.exports = {
 };
 ```
 
-
 ## Definition of concepts
 
-**GX** comes with some new concepts like `signal`, `action` and `store`.
+**GX** comes with some new concepts like `signal`, `action`, and `store`.
 
 ### 1. Signal
 
@@ -100,7 +97,7 @@ For handle it, there is a special `createSignal` function for this case.
 
 ### 2. Action
 
-**Actions** represent functions that act to the state and make it changing over the time. 
+**Actions** represent functions that act to the state and make it changing over the time.
 
 Your have to specify these `actions` when you create yours `signals`.
 
@@ -121,7 +118,6 @@ For structuring your code very well you have to follow these steps.
 - Inside the signals directory you will create files that will contains your state declaration with actions that act to this state. (**ie: counter.js**)
 - Inside the store directory, just create an index.js file. We will see how to fill it.
 
-
 Here is the result.
 
 ![structure](https://lh3.googleusercontent.com/_z_JTStNFHyXTmjz4GrcphAN6BC_CeKYxN1zwyxWGC-ujpIcVTqthesXT6Lfe8b4t1M=w2400)
@@ -131,10 +127,10 @@ Here is the result.
 Inside the `signals` directory, create a file called `counter.js` for example.
 
 ```js
-import { createSignal } from '@dilane3/gx';
+import { createSignal } from "@dilane3/gx";
 
 const counterSignal = createSignal({
-  name: 'counter',
+  name: "counter",
   state: 0,
   actions: {
     increment: (state, payload) => {
@@ -143,8 +139,8 @@ const counterSignal = createSignal({
 
     decrement: (state, payload) => {
       return state - payload;
-    }
-  }
+    },
+  },
 });
 
 export default counterSignal;
@@ -173,7 +169,7 @@ import GXProvider from "@dilane3/gx";
 function App() {
   return (
     <GXProvider store={store}>
-      { 
+      {
         // Your application here
       }
     </GXProvider>
@@ -186,7 +182,6 @@ export default App;
 ### Fifth step: Using your signals.
 
 Create a component called `Counter` inside the Counter.js file. Then import two hooks from `gx` called `useSignal` and `useActions` like follow.
-
 
 ```js
 import React from "react";
@@ -214,11 +209,78 @@ function Counter() {
 export default Counter;
 ```
 
-Note that the `useSignal` hook takes the name of the signal as a parameter and return the state contained inside that signal. 
+Note that the `useSignal` hook takes the name of the signal as a parameter and return the state contained inside that signal.
 
 The `useAction` hook takes the name of the signal too and returns an object that contains all the actions of this signal.
 
 Actually, if you click on the increment button, the counter will increase by one and if you click on the decrement button, the counter will decrease by one.
+
+### Sixth step: Adding operations to your signals.
+
+This feature comes with the version `1.3.0` of `gx`. It allows you to add operations to your signals.
+**Operations** are functions that use your current state and apply some filters on it. They return the result of the operation without changing the state.
+
+For example, if you want to know if the counter is even or odd, you can create an operation called `isEven` like follow.
+
+```js
+import { createSignal } from "@dilane3/gx";
+
+const counterSignal = createSignal({
+  name: "counter",
+  state: 0,
+  actions: {
+    increment: (state, payload) => {
+      return state + payload;
+    },
+
+    decrement: (state, payload) => {
+      return state - payload;
+    },
+  },
+
+  // Operations section
+  operations: {
+    isEven: (state) => {
+      return state % 2 === 0;
+    },
+  },
+});
+
+export default counterSignal;
+```
+
+Then, you can use it inside your component like follow.
+
+```js
+import React from "react";
+import { useSignal, useActions, useOperations } from "@dilane3/gx";
+
+function Counter() {
+  // State
+  const counter = useSignal("counter");
+
+  // Actions
+  const { increment, decrement } = useActions("counter");
+
+  // Operations
+  const { isEven } = useOperations("counter");
+
+  return (
+    <div>
+      <h1>Counter App</h1>
+
+      <p>Count: {counter}</p>
+
+      <p>is even: {isEven() ? "yes" : "no"}</p>
+
+      <button onClick={() => increment(1)}>Increment</button>
+      <button onClick={() => decrement(1)}>Decrement</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
 
 ## API
 
@@ -228,12 +290,11 @@ This function takes an object as a parameter and returns a signal.
 
 The object must contain the following properties:
 
-
-| Properties | Type | Description |
-| --- | --- | --- |
-| `name` | `string` | The name of the signal. It must be unique. |
-| `state` | `any` | The initial state of the signal. |
-| `actions` | `object` | An object that contains all the actions of the signal. |
+| Properties | Type     | Description                                            |
+| ---------- | -------- | ------------------------------------------------------ |
+| `name`     | `string` | The name of the signal. It must be unique.             |
+| `state`    | `any`    | The initial state of the signal.                       |
+| `actions`  | `object` | An object that contains all the actions of the signal. |
 
 Structure of the `actions` object:
 
@@ -242,12 +303,11 @@ Structure of the `actions` object:
   actionName: (state, payload) => {
     // Do something with the state and the payload
     return state;
-  }
+  };
 }
 ```
 
 All actions must return the new state of the signal.
-
 
 ### `createStore`
 
@@ -264,7 +324,7 @@ This component takes a store as a parameter and wraps your application with it.
 ```jsx
 const App = () => (
   <GXProvider store={store}>
-    { 
+    {
       // Your application here
     }
   </GXProvider>

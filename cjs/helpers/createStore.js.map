@@ -1,1 +1,0 @@
-{"version":3,"file":"createStore.js","sourceRoot":"","sources":["../../src/helpers/createStore.ts"],"names":[],"mappings":";;AAGA,MAAM,WAAW,GAAG,CAAC,OAAuB,EAAmB,EAAE;IAC/D,OAAO;QACL,UAAU,EAAE,GAAG,EAAE,CAAC,OAAO;KAC1B,CAAC;AACJ,CAAC,CAAC;AAEF,kBAAe,WAAW,CAAC"}

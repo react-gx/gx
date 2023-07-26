@@ -1,4 +1,4 @@
-import { GXAction } from "../providers/types";
+import { GXAction } from "../providers/types.js";
 
 export type GXSignalType<T = any> = {
   // Name of the signal

@@ -1,7 +1,7 @@
 import { useReducer } from "react";
-import GXContext from "../contexts";
-import { GXProviderProps } from "./types";
-import gxReducer from "./reducer";
+import GXContext from "../contexts/index.js";
+import { GXProviderProps } from "./types.js";
+import gxReducer from "./reducer.js";
 
 export default function GXProvider({ children, store }: GXProviderProps) {
   // Global state that manage all signals

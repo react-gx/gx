@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
-const contexts_1 = __importDefault(require("../contexts"));
+const index_js_1 = __importDefault(require("../contexts/index.js"));
 const useSignal = (signalName) => {
-    const { signals } = (0, react_1.useContext)(contexts_1.default);
+    const { signals } = (0, react_1.useContext)(index_js_1.default);
     const memoizedSignals = (0, react_1.useMemo)(() => signals, [signals]);
     /**
      * Get state of a signal base on its name

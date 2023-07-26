@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { GXContextType } from "./types";
+import { GXContextType } from "./types.js";
 
 const GXContext = createContext<GXContextType>({
   signals: [],
-  dispatch: () => {}
+  dispatch: () => {},
 });
 
-export default GXContext
+export default GXContext;

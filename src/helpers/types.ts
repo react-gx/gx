@@ -1,4 +1,4 @@
-import { GXSignalType } from "../contexts/types";
+import { GXSignalType } from "../contexts/types.js";
 
 export type CreateSignalOptionType<T> = {
   name: string;
