@@ -1,10 +1,18 @@
 /// <reference types="react" />
-import { CreateStoreType } from '../helpers/types.js';
+import { AsyncActionStatusesType, CreateStoreType } from '../helpers/types.js';
+/**
+ * Props of the GX Provider
+ */
 export type GXProviderProps = {
     children: React.ReactElement;
     store: CreateStoreType;
 };
+/**
+ * Type of the actions
+ */
 export type GXAction = {
     type: string;
-    payload: any;
+    isAsync: boolean;
+    status?: AsyncActionStatusesType;
+    payload?: any;
 };

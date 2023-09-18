@@ -1,0 +1,1 @@
+{"version":3,"file":"builder.js","sourceRoot":"","sources":["../../src/interfaces/builder.ts"],"names":[],"mappings":";;;AACA,qDAA6D;AAM7D,MAAa,OAAO;IAGlB;QACE,IAAI,CAAC,YAAY,GAAG,IAAI,4BAAW,EAAE,CAAC;IACxC,CAAC;IAED,GAAG,CAAC,WAAwC;QAC1C,IAAI,CAAC,YAAY,CAAC,WAAW,GAAG,WAAW,CAAC;QAE5C,OAAO,IAAI,CAAC,YAAY,CAAC;IAC3B,CAAC;CACF;AAZD,0BAYC"}

@@ -46,6 +46,7 @@ const useActions = (signalName, ...actions) => {
             formattedActions[actionName] = (payload) => {
                 dispatch({
                     type: action.type,
+                    isAsync: false,
                     payload,
                 });
             };

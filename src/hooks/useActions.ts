@@ -54,6 +54,7 @@ const useActions = <T = Actions>(signalName: string, ...actions: string[]) => {
       formattedActions[actionName] = (payload?: any) => {
         dispatch({
           type: action.type,
+          isAsync: false,
           payload,
         });
       };
