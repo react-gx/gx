@@ -1,35 +1,34 @@
 import { GXSignalType } from "../contexts/types.js";
 import { GXAction } from "./types.js";
 
-const gxReducer = (signals: GXSignalType[], action: GXAction) => {
-  // Prev signals
-  const prevSignals = [...signals];
+const gxReducer = (
+  signals: GXSignalType[],
+  action: GXAction
+): GXSignalType[] => {
+  // Loop through all signals, make updates on states
+  // and returns a new array of signals (immutability).
+  return signals.map(({ name, operations, actions, state: prevState }) => {
+    let state = prevState;
 
-  // Get the signal name
-  const signalName = action.type.split("/")[0];
-
-  // Get the signal
-  const signal = prevSignals.find((signal) => signal.name === signalName);
-
-  if (!signal) throw new Error(`Signal "${signalName}" not found`);
-
-  let actionToDispatch = null;
-
-  // Get the action
-  for (let act of signal.actions) {
-    if (act.type === action.type) {
-      actionToDispatch = act;
-
-      break;
+    // Capture the target signal (a state and a bunch of actions) from the array of signals.
+    // Capture the action from array of actions (of the target signal).
+    // Run the action and update the signal state.
+    if (name === action.type.split("/")[0]) {
+      for (let { type, handler } of actions) {
+        if (type === action.type) {
+          state = handler(prevState, action.payload);
+          break;
+        }
+      }
     }
-  }
 
-  if (actionToDispatch) {
-    // Dispatch the action
-    signal.state = actionToDispatch.handler(signal.state, action.payload);
-  } else throw new Error(`Action "${action.type}" not found`);
-
-  return prevSignals;
+    return {
+      name,
+      operations,
+      state,
+      actions,
+    };
+  });
 };
 
 export default gxReducer;
