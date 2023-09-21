@@ -22,11 +22,11 @@ const useAsyncActions = (signalName, ...actions) => {
     const { signals, asyncDispatch } = (0, react_1.useContext)(contexts_1.default);
     // Some handlers
     /**
-     * Get actions of a signal
+     * Get async actions of a signal
      * @param signalName
      * @returns
      */
-    const handleGetActions = (signalName) => {
+    const handleGetAsyncActions = (signalName) => {
         const signal = signals.find((signal) => signal.name === signalName);
         if (signal) {
             if (!actions || actions.length === 0)
@@ -45,9 +45,9 @@ const useAsyncActions = (signalName, ...actions) => {
         else
             throw new Error(`Signal ${signalName} not found`);
     };
-    const handleFormatActions = () => {
+    const handleFormatAsyncActions = () => {
         // Get actions
-        const nonFormattedActions = handleGetActions(signalName);
+        const nonFormattedActions = handleGetAsyncActions(signalName);
         // Formatted actions
         const formattedActions = {};
         for (const action of nonFormattedActions) {
@@ -88,7 +88,7 @@ const useAsyncActions = (signalName, ...actions) => {
         }
         return formattedActions;
     };
-    return handleFormatActions();
+    return handleFormatAsyncActions();
 };
 exports.default = useAsyncActions;
 //# sourceMappingURL=useAsyncActions.js.map

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BuilderCase = void 0;
+const types_js_1 = require("../helpers/types.js");
 /**
  * Builder case class for managing different cases of the asynchronous task
  * @param _cases List of cases defined for a specific asynchronous task
@@ -49,6 +50,30 @@ class BuilderCase {
             handler,
         });
         return this;
+    }
+    /**
+     * Method that add a pending case into the _cases list and return a new case builder object
+     * @param handler Function that is executed depending on the specific status
+     * @returns
+     */
+    onPending(handler) {
+        return this.case(types_js_1.AsyncActionStatuses.PENDING, handler);
+    }
+    /**
+     * Method that add a fulfilled case into the _cases list and return a new case builder object
+     * @param handler Function that is executed depending on the specific status
+     * @returns
+     */
+    onFulfilled(handler) {
+        return this.case(types_js_1.AsyncActionStatuses.FULFILLED, handler);
+    }
+    /**
+     * Method that add a rejected case into the _cases list and return a new case builder object
+     * @param handler Function that is executed depending on the specific status
+     * @returns
+     **/
+    onRejected(handler) {
+        return this.case(types_js_1.AsyncActionStatuses.REJECTED, handler);
     }
 }
 exports.BuilderCase = BuilderCase;

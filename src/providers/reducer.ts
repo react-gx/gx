@@ -1,10 +1,7 @@
 import {
   GXActionType,
-  GXAsyncActionType,
   GXSignalType,
 } from "../contexts/types.js";
-import { AsyncActionStatuses } from "../helpers/types.js";
-import { BuilderCase } from "../interfaces/builderCase.js";
 import { GXAction } from "./types.js";
 
 const gxReducer = (signals: GXSignalType[], action: GXAction) => {
