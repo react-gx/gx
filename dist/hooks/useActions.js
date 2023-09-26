@@ -6,8 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 const index_js_1 = __importDefault(require("../contexts/index.js"));
 const useActions = (signalName, ...actions) => {
-    if (!signalName || typeof signalName !== "string")
-        throw new Error("Provide a signalName as first argument of useActions");
+    if (!signalName || typeof signalName !== 'string') {
+        throw new Error('Provide a signalName as first argument of useActions');
+    }
     // Get Global Context
     const { signals, dispatch } = (0, react_1.useContext)(index_js_1.default);
     // Some handlers
@@ -22,7 +23,7 @@ const useActions = (signalName, ...actions) => {
             if (!actions || actions.length === 0)
                 return signal.actions;
             const filteredActions = [];
-            for (let action of actions) {
+            for (const action of actions) {
                 const actionName = `${signalName}/${action}`;
                 const retrievedAction = signal.actions.find((act) => act.type === actionName);
                 if (retrievedAction)
@@ -42,11 +43,12 @@ const useActions = (signalName, ...actions) => {
         const formattedActions = {};
         for (const action of nonFormattedActions) {
             // Get action name
-            const actionName = action.type.split("/")[1];
+            const actionName = action.type.split('/')[1];
             formattedActions[actionName] = (payload) => {
                 dispatch({
                     type: action.type,
-                    payload,
+                    isAsync: false,
+                    payload
                 });
             };
         }

@@ -1,47 +1,80 @@
-import { GXAction } from "../providers/types.js";
+import type IBuilderCase from '../interfaces/builderCase.js'
+import { type GXAction } from '../providers/types.js'
 
-export type GXSignalType<T = any> = {
+/**
+ * Type that represents a signal
+ */
+export interface GXSignalType<T = any> {
   // Name of the signal
-  name: string;
+  name: string
 
   // State inside the signal
-  state: T,
+  state: T
 
   // Actions of the signal
-  actions: GXActionType<T>[],
+  actions?: Array<GXActionType<T>>
 
-  // Operation of the signal
-  operations?: GXOperationType<T>[]
+  // Operations of the signal
+  operations?: Array<GXOperationType<T>>
+
+  // Async actions of the signal
+  asyncActions?: Array<GXAsyncActionType<T>>
 }
 
-export type GXActionType<T, P = any> = {
+/**
+ * Type that represents Actions
+ */
+export interface GXActionType<T, P = any> {
   // Represent the type of the action
-  type: string,
+  type: string
 
   // The handler function
   handler: (state: T, payload: P) => T
 }
 
-export type GXOperationType<T, P = any, Q = any> = {
+/**
+ * Type that represents operations
+ */
+export interface GXOperationType<T, P = any, Q = any> {
   // Represent the type of the operation
-  type: string,
+  type: string
 
   // The handle function
   handler: (state: T, payload: P) => Q
 }
 
-export type DispatchedActionType = {
+/**
+ * Type that represents async actions
+ */
+export interface GXAsyncActionType<T, P = any> {
+  // Represent the type of the operation
+  type: string
+
+  // List of cases
+  steps: IBuilderCase<T, P>
+}
+
+/**
+ * Type of dispatched action
+ */
+export interface DispatchedActionType {
   // The type of the action
-  type: string,
+  type: string
 
   // The payload of the action
   payload: any
 }
 
-export type GXContextType = {
+/**
+ * Type of the signals context
+ */
+export interface GXContextType {
   // Signals
-  signals: GXSignalType[],
+  signals: GXSignalType[]
 
   // Dispatch
   dispatch: React.Dispatch<GXAction>
+
+  // Async Dispatch
+  asyncDispatch: (action: GXAction) => any
 }

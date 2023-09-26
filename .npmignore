@@ -1,3 +1,6 @@
 node_modules
 src
 tsconfig.json
+.babelrc
+yarn.lock
+.eslintrc.json

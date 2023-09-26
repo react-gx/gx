@@ -1,43 +1,44 @@
-import { useContext } from "react";
-import GXContext from "../contexts/index.js";
-import { Operations } from "./types.js";
+import { useContext } from 'react'
+import GXContext from '../contexts/index.js'
+import { type Operations } from './types.js'
 
 const useOperations = <T = Operations>(signalName: string) => {
   // Get Global Context
-  const { signals } = useContext(GXContext);
+  const { signals } = useContext(GXContext)
 
-  if (!signalName || typeof signalName !== "string")
+  if (!signalName || typeof signalName !== 'string') {
     throw new Error(
-      "Provide a signalName as a first argument of useOperations"
-    );
+      'Provide a signalName as a first argument of useOperations'
+    )
+  }
 
   const handleFormatOperations = (): T => {
-    const signal = signals.find((signal) => signal.name === signalName);
+    const signal = signals.find((signal) => signal.name === signalName)
 
-    if (!signal) throw new Error(`Signal ${signalName} not found`);
+    if (!signal) throw new Error(`Signal ${signalName} not found`)
 
     // Get actions
-    const nonFormattedOperations = signal.operations;
+    const nonFormattedOperations = signal.operations
 
     // Formatted actions
-    const formattedOperations = {} as any;
+    const formattedOperations = {} as any
 
     for (const operation of nonFormattedOperations) {
       // Get action name
-      const operationName = operation.type.split("/")[1];
+      const operationName = operation.type.split('/')[1]
 
       formattedOperations[operationName] = (payload?: any) => {
-        return operation.handler(signal.state, payload);
-      };
+        return operation.handler(signal.state, payload)
+      }
     }
 
     // return formattedOperations;
 
-    return formattedOperations;
-  };
+    return formattedOperations
+  }
 
-  return handleFormatOperations();
-};
+  return handleFormatOperations()
+}
 
 // Définir un type générique pour représenter une fonction
 // type FunctionType<T extends (payload: any) => any> = T;
@@ -59,4 +60,4 @@ const useOperations = <T = Operations>(signalName: string) => {
 // // Utilisation d'une fonction auxiliaire pour extraire le type de retour d'une fonction
 // type ReturnTypeFunc<T> = T extends (...args: any[]) => infer R ? R : any;
 
-export default useOperations;
+export default useOperations

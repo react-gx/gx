@@ -1,14 +1,18 @@
-import { useContext } from "react";
-import GXContext from "../contexts/index.js";
-import { GXActionType } from "../contexts/types.js";
-import { Actions } from "./types.js";
+import { useContext } from 'react'
+import GXContext from '../contexts/index.js'
+import { type GXActionType } from '../contexts/types.js'
+import { type Actions } from './types.js'
 
-const useActions = <T = Actions>(signalName: string, ...actions: string[]) => {
-  if (!signalName || typeof signalName !== "string")
-    throw new Error("Provide a signalName as first argument of useActions");
+const useActions = <T = Actions>(
+  signalName: string,
+  ...actions: string[]
+): T => {
+  if (!signalName || typeof signalName !== 'string') {
+    throw new Error('Provide a signalName as first argument of useActions')
+  }
 
   // Get Global Context
-  const { signals, dispatch } = useContext(GXContext);
+  const { signals, dispatch } = useContext(GXContext)
 
   // Some handlers
 
@@ -18,51 +22,52 @@ const useActions = <T = Actions>(signalName: string, ...actions: string[]) => {
    * @returns
    */
   const handleGetActions = (signalName: string) => {
-    const signal = signals.find((signal) => signal.name === signalName);
+    const signal = signals.find((signal) => signal.name === signalName)
 
     if (signal) {
-      if (!actions || actions.length === 0) return signal.actions;
+      if (!actions || actions.length === 0) return signal.actions
 
-      const filteredActions: GXActionType<any>[] = [];
+      const filteredActions: Array<GXActionType<any>> = []
 
-      for (let action of actions) {
-        const actionName = `${signalName}/${action}`;
+      for (const action of actions) {
+        const actionName = `${signalName}/${action}`
 
         const retrievedAction = signal.actions.find(
           (act) => act.type === actionName
-        );
+        )
 
-        if (retrievedAction) filteredActions.push(retrievedAction);
-        else throw new Error(`Action ${actionName} not found`);
+        if (retrievedAction) filteredActions.push(retrievedAction)
+        else throw new Error(`Action ${actionName} not found`)
       }
 
-      return filteredActions;
-    } else throw new Error(`Signal ${signalName} not found`);
-  };
+      return filteredActions
+    } else throw new Error(`Signal ${signalName} not found`)
+  }
 
   const handleFormatActions = (): T => {
     // Get actions
-    const nonFormattedActions = handleGetActions(signalName);
+    const nonFormattedActions = handleGetActions(signalName)
 
     // Formatted actions
-    const formattedActions = {} as any;
+    const formattedActions = {} as any
 
     for (const action of nonFormattedActions) {
       // Get action name
-      const actionName = action.type.split("/")[1];
+      const actionName = action.type.split('/')[1]
 
       formattedActions[actionName] = (payload?: any) => {
         dispatch({
           type: action.type,
-          payload,
-        });
-      };
+          isAsync: false,
+          payload
+        })
+      }
     }
 
-    return formattedActions;
-  };
+    return formattedActions
+  }
 
-  return handleFormatActions();
-};
+  return handleFormatActions()
+}
 
-export default useActions;
+export default useActions

@@ -1,24 +1,49 @@
 /// <reference types="react" />
-import { GXAction } from "../providers/types.js";
-export type GXSignalType<T = any> = {
+import type IBuilderCase from '../interfaces/builderCase.js';
+import { type GXAction } from '../providers/types.js';
+/**
+ * Type that represents a signal
+ */
+export interface GXSignalType<T = any> {
     name: string;
     state: T;
-    actions: GXActionType<T>[];
-    operations?: GXOperationType<T>[];
-};
-export type GXActionType<T, P = any> = {
+    actions?: Array<GXActionType<T>>;
+    operations?: Array<GXOperationType<T>>;
+    asyncActions?: Array<GXAsyncActionType<T>>;
+}
+/**
+ * Type that represents Actions
+ */
+export interface GXActionType<T, P = any> {
     type: string;
     handler: (state: T, payload: P) => T;
-};
-export type GXOperationType<T, P = any, Q = any> = {
+}
+/**
+ * Type that represents operations
+ */
+export interface GXOperationType<T, P = any, Q = any> {
     type: string;
     handler: (state: T, payload: P) => Q;
-};
-export type DispatchedActionType = {
+}
+/**
+ * Type that represents async actions
+ */
+export interface GXAsyncActionType<T, P = any> {
+    type: string;
+    steps: IBuilderCase<T, P>;
+}
+/**
+ * Type of dispatched action
+ */
+export interface DispatchedActionType {
     type: string;
     payload: any;
-};
-export type GXContextType = {
+}
+/**
+ * Type of the signals context
+ */
+export interface GXContextType {
     signals: GXSignalType[];
     dispatch: React.Dispatch<GXAction>;
-};
+    asyncDispatch: (action: GXAction) => any;
+}

@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": ["standard-with-typescript", "plugin:react/recommended"],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["react", "immutable"],
+    "rules": {
+        "immutable/no-mutation": "error",
+        "no-console": "error"
+    },
+    "ignorePatterns": ["node_modules/*", "dist/*", "/src/tests/*"] // Add the files or folders you want to exclude here
+}
