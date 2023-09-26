@@ -1,70 +1,64 @@
-import { GXSignalType } from "../contexts/types.js";
-import { Builder } from "../interfaces/builder.js";
-import IBuilderCase from "../interfaces/builderCase.js";
+import { type GXSignalType } from '../contexts/types.js'
+import { type Builder } from '../interfaces/builder.js'
+import type IBuilderCase from '../interfaces/builderCase.js'
 
 /**
  * Type of the create signal option function
  */
-export type CreateSignalOptionType<T> = {
+export interface CreateSignalOptionType<T> {
   // Name of the signal
-  name: string;
+  name: string
 
   // State of the signal
-  state: T;
+  state: T
 
   // Actions of the signal
-  actions?: Action<T>;
+  actions?: Action<T>
 
   // Operations of the signal
-  operations?: Operation<T>;
+  operations?: Operation<T>
 
   // Async actions of the signal
-  asyncActions?: AsyncAction<T>;
-};
+  asyncActions?: AsyncAction<T>
+}
 
 /**
  * Type of the returned data of create store function
  */
-export type CreateStoreType = {
+export interface CreateStoreType {
   // Function that return the list of signals
-  getSignals: () => GXSignalType[];
-};
+  getSignals: () => GXSignalType[]
+}
 
 /**
  * Type of Action
  */
-export type Action<T> = {
-  [key: string]: (state: T, payload: any) => T;
-};
+export type Action<T> = Record<string, (state: T, payload: any) => T>
 
 /**
  * Type of Operation
  */
-export type Operation<T> = {
-  [key: string]: (state: T, payload?: any) => any;
-};
+export type Operation<T> = Record<string, (state: T, payload?: any) => any>
 
 /**
  * Type of Async Action
  */
-export type AsyncAction<T> = (builder: Builder<T>) => {
-  [key: string]: IBuilderCase<T>;
-};
+export type AsyncAction<T> = (builder: Builder<T>) => Record<string, IBuilderCase<T>>
 
-export type CreateAsyncActionProp = (payload?: any) => Promise<any>;
+export type CreateAsyncActionProp = (payload?: any) => Promise<any>
 
-export type CreateAsyncActionReturnType = {
-  pending: AsyncActionStatusesType;
-  fulfilled: AsyncActionStatusesType;
-  rejected: AsyncActionStatusesType;
-  handler: CreateAsyncActionProp;
-};
+export interface CreateAsyncActionReturnType {
+  pending: AsyncActionStatusesType
+  fulfilled: AsyncActionStatusesType
+  rejected: AsyncActionStatusesType
+  handler: CreateAsyncActionProp
+}
 
 export const AsyncActionStatuses = {
-  PENDING: "PENDING",
-  FULFILLED: "FULFILLED",
-  REJECTED: "REJECTED",
-} as const;
+  PENDING: 'PENDING',
+  FULFILLED: 'FULFILLED',
+  REJECTED: 'REJECTED'
+} as const
 
 export type AsyncActionStatusesType =
-  (typeof AsyncActionStatuses)[keyof typeof AsyncActionStatuses];
+  (typeof AsyncActionStatuses)[keyof typeof AsyncActionStatuses]

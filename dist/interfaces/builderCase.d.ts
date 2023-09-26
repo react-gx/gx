@@ -1,12 +1,12 @@
-import { AsyncActionStatusesType, CreateAsyncActionReturnType } from "../helpers/types.js";
+import { type AsyncActionStatusesType, type CreateAsyncActionReturnType } from '../helpers/types.js';
 /**
  * Interface for builder case
  */
 export default interface IBuilderCase<T, P = any> {
-    case(status: AsyncActionStatusesType, handler: (state: T, payload?: P) => T): IBuilderCase<T, P>;
-    onPending(handler: (state: T, payload?: P) => T): IBuilderCase<T, P>;
-    onFulfilled(handler: (state: T, payload?: P) => T): IBuilderCase<T, P>;
-    onRejected(handler: (state: T, payload?: P) => T): IBuilderCase<T, P>;
+    case: (status: AsyncActionStatusesType, handler: (state: T, payload?: P) => T) => IBuilderCase<T, P>;
+    onPending: (handler: (state: T, payload?: P) => T) => IBuilderCase<T, P>;
+    onFulfilled: (handler: (state: T, payload?: P) => T) => IBuilderCase<T, P>;
+    onRejected: (handler: (state: T, payload?: P) => T) => IBuilderCase<T, P>;
 }
 /**
  * Builder case class for managing different cases of the asynchronous task
@@ -19,7 +19,7 @@ export declare class BuilderCase<T, P = any> implements IBuilderCase<T, P> {
     /**
      * Get the list of cases
      */
-    get cases(): Case<T, P>[];
+    get cases(): Array<Case<T, P>>;
     /**
      * Get the async action
      */
@@ -32,7 +32,7 @@ export declare class BuilderCase<T, P = any> implements IBuilderCase<T, P> {
     /**
      * Update the cases
      */
-    set cases(cases: Case<T, P>[]);
+    set cases(cases: Array<Case<T, P>>);
     /**
      * Method that add a new case into the _cases list and return a new case builder object
      * @param status Status of the asynchronous task

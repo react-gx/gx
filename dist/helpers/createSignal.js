@@ -12,27 +12,27 @@ const createSignal = (options) => {
     const asyncActions = [];
     // Convert the actions object to an array
     const actionsTable = Object.entries(options.actions || {});
-    for (let action of actionsTable) {
+    for (const action of actionsTable) {
         actions.push({
             type: `${options.name}/${action[0]}`,
-            handler: action[1],
+            handler: action[1]
         });
     }
     // Convert the operations object to an array
     const operationsTable = Object.entries(options.operations || {});
-    for (let operation of operationsTable) {
+    for (const operation of operationsTable) {
         operations.push({
             type: `${options.name}/${operation[0]}`,
-            handler: operation[1],
+            handler: operation[1]
         });
     }
     // Convert the async Actions object to an array
     const builder = new builder_js_1.Builder();
     const asyncActionsTable = Object.entries(options.asyncActions ? options.asyncActions(builder) : {});
-    for (let action of asyncActionsTable) {
+    for (const action of asyncActionsTable) {
         asyncActions.push({
             type: `${options.name}/${action[0]}`,
-            steps: action[1],
+            steps: action[1]
         });
     }
     // Create a signal
@@ -41,7 +41,7 @@ const createSignal = (options) => {
         state: options.state,
         actions,
         operations,
-        asyncActions,
+        asyncActions
     };
     return signal;
 };

@@ -28,9 +28,17 @@
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^39.0.0",
+    "eslint-plugin-immutable": "^1.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.33.2",
     "react-dom": "^18.0.0",
     "react-scripts": "^5.0.1",
-    "typescript": "^4.4.2"
+    "typescript": "*"
   },
   "peerDependencies": {
     "react": "^18.0.0"
@@ -38,7 +46,8 @@
   "scripts": {
     "build": "tsc",
     "test": "react-scripts test",
-    "deploy": "npm publish --access public"
+    "deploy": "npm publish --access public",
+    "lint": "npx eslint src --ext .ts,.tsx"
   },
   "keywords": [
     "react",

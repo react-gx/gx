@@ -8,8 +8,9 @@ const index_js_1 = __importDefault(require("../contexts/index.js"));
 const useOperations = (signalName) => {
     // Get Global Context
     const { signals } = (0, react_1.useContext)(index_js_1.default);
-    if (!signalName || typeof signalName !== "string")
-        throw new Error("Provide a signalName as a first argument of useOperations");
+    if (!signalName || typeof signalName !== 'string') {
+        throw new Error('Provide a signalName as a first argument of useOperations');
+    }
     const handleFormatOperations = () => {
         const signal = signals.find((signal) => signal.name === signalName);
         if (!signal)
@@ -20,7 +21,7 @@ const useOperations = (signalName) => {
         const formattedOperations = {};
         for (const operation of nonFormattedOperations) {
             // Get action name
-            const operationName = operation.type.split("/")[1];
+            const operationName = operation.type.split('/')[1];
             formattedOperations[operationName] = (payload) => {
                 return operation.handler(signal.state, payload);
             };

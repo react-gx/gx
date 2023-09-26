@@ -1,10 +1,10 @@
-import { createContext } from "react";
-import { GXContextType } from "./types.js";
+import { createContext } from 'react'
+import { type GXContextType } from './types.js'
 
 const GXContext = createContext<GXContextType>({
   signals: [],
   dispatch: () => {},
-  asyncDispatch: () => {},
-});
+  asyncDispatch: () => {}
+})
 
-export default GXContext;
+export default GXContext

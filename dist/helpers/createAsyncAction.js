@@ -11,7 +11,7 @@ const createAsyncAction = (handler) => {
         pending: types_js_1.AsyncActionStatuses.PENDING,
         fulfilled: types_js_1.AsyncActionStatuses.FULFILLED,
         rejected: types_js_1.AsyncActionStatuses.REJECTED,
-        handler,
+        handler
     };
 };
 exports.default = createAsyncAction;

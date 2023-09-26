@@ -3,3 +3,4 @@ src
 tsconfig.json
 .babelrc
 yarn.lock
+.eslintrc.json

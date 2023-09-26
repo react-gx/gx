@@ -1,5 +1,5 @@
-import { GXSignalType } from "../contexts/types.js";
-import { CreateStoreType } from "./types.js";
+import { type GXSignalType } from '../contexts/types.js'
+import { type CreateStoreType } from './types.js'
 
 /**
  * Function that create a store by collection a list of signals
@@ -8,8 +8,8 @@ import { CreateStoreType } from "./types.js";
  */
 const createStore = (signals: GXSignalType[]): CreateStoreType => {
   return {
-    getSignals: () => signals,
-  };
-};
+    getSignals: () => signals
+  }
+}
 
-export default createStore;
+export default createStore

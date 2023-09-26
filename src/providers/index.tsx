@@ -1,9 +1,9 @@
-import { useReducer, useTransition } from "react";
+import React, { useEffect } from "react";
+import { useCallback, useReducer, useTransition } from "react";
 import GXContext from "../contexts/index.js";
-import { GXAction, GXProviderProps } from "./types.js";
+import { type GXAction, type GXProviderProps } from "./types.js";
 import gxReducer from "./reducer.js";
-import { GXAsyncActionType } from "../contexts/types.js";
-import { BuilderCase } from "../interfaces/builderCase.js";
+import { type BuilderCase } from "../interfaces/builderCase.js";
 
 export default function GXProvider({ children, store }: GXProviderProps) {
   // Global state that manage all signals
@@ -19,49 +19,57 @@ export default function GXProvider({ children, store }: GXProviderProps) {
     });
   };
 
-  const asyncDispatch = (action: GXAction) => {
+  const asyncDispatch = useCallback((action: GXAction) => {
     const signalName = action.type.split("/")[0];
 
-    // Get the signal
-    const signal = signals.find((signal) => signal.name === signalName);
-    let state = signal.state;
+    const newState = signals.map(
+      ({ name, operations, actions, asyncActions, state: prevState }) => {
+        let state = prevState;
 
-    if (!signal) throw new Error(`Signal "${signalName}" not found`);
-
-    if (action.isAsync) {
-      let actionToDispatch: GXAsyncActionType<any> = null;
-
-      // Get the action
-      for (let act of signal.asyncActions) {
-        if (act.type === action.type) {
-          actionToDispatch = act;
-
-          break;
+        // Capture the target signal (a state and a bunch of async actions) from the array of signals.
+        // Capture the action from array of async actions (of the target signal).
+        // Run the async action and update the signal state.
+        if (name === signalName) {
+          if (action.isAsync) {
+            for (const { type, steps } of asyncActions) {
+              if (type === action.type) {
+                state = (steps as BuilderCase<any>).cases
+                  .find((c) => c.status === action.status)
+                  .handler(state, action.payload);
+                break;
+              }
+            }
+          }
         }
-      }
 
-      if (actionToDispatch)
-        state = (actionToDispatch.steps as BuilderCase<any>).cases
-          .find((c) => c.status === action.status)
-          .handler(signal.state, action.payload);
-      else throw new Error(`Async Action "${action.type}" not found`);
-    }
+        return {
+          name,
+          operations,
+          state,
+          actions,
+          asyncActions,
+        };
+      }
+    );
+
+    // Find the new state of the target signal
+    const signal = newState.find((signal) => signal.name === signalName);
 
     dispatch({
       type: action.type,
       isAsync: action.isAsync,
       status: action.status,
-      payload: state,
+      payload: signal.state,
     });
 
-    return state;
-  };
+    return signal.state;
+  }, []);
 
   // Context value
   const contextValue = {
     signals,
     dispatch: syncDispatch,
-    asyncDispatch,
+    asyncDispatch
   };
 
   return (

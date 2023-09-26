@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const createStore = (signals) => {
     return {
-        getSignals: () => signals,
+        getSignals: () => signals
     };
 };
 exports.default = createStore;

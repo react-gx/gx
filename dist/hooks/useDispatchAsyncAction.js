@@ -3,23 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = __importDefault(require("react"));
-const react_2 = require("react");
-const index_js_1 = __importDefault(require("../contexts/index.js"));
-const reducer_js_1 = __importDefault(require("./reducer.js"));
-function GXProvider({ children, store }) {
-    // Global state that manage all signals
-    const [signals, dispatch] = (0, react_2.useReducer)(reducer_js_1.default, store.getSignals());
-    // Wrap your dispatch function with useTransition
-    const [, startTransition] = (0, react_2.useTransition)();
-    // Your state management logic using useContext and useReducer
-    const syncDispatch = (action) => {
-        startTransition(() => {
-            dispatch(action);
-        });
-    };
-    const asyncDispatch = (0, react_2.useCallback)((action) => {
+const react_1 = require("react");
+const contexts_1 = __importDefault(require("../contexts"));
+function useDispatchAsyncAction() {
+    // Global state
+    const { signals } = (0, react_1.useContext)(contexts_1.default);
+    // Some handlers
+    const asyncDispatch = (0, react_1.useCallback)((action) => {
         const signalName = action.type.split("/")[0];
         console.log(action.status);
         const newState = signals.map(({ name, operations, actions, asyncActions, state: prevState }) => {
@@ -49,23 +39,15 @@ function GXProvider({ children, store }) {
         });
         // Find the new state of the target signal
         const signal = newState.find((signal) => signal.name === signalName);
-        dispatch({
-            type: action.type,
-            isAsync: action.isAsync,
-            status: action.status,
-            payload: signal.state,
-        });
+        // dispatch({
+        //   type: action.type,
+        //   isAsync: action.isAsync,
+        //   status: action.status,
+        //   payload: signal.state,
+        // });
         return signal.state;
     }, []);
-    // Ref
-    const asyncActionRef = react_1.default.useRef(asyncDispatch);
-    // Context value
-    const contextValue = {
-        signals,
-        dispatch: syncDispatch,
-        asyncDispatch: asyncActionRef.current,
-    };
-    return ((0, jsx_runtime_1.jsx)(index_js_1.default.Provider, { value: contextValue, children: children }));
+    return asyncDispatch;
 }
-exports.default = GXProvider;
-//# sourceMappingURL=index.js.map
+exports.default = useDispatchAsyncAction;
+//# sourceMappingURL=useDispatchAsyncAction.js.map

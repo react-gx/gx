@@ -1,3 +1,3 @@
-import { Operations } from "./types.js";
-declare const useOperations: <T = Operations<any>>(signalName: string) => T;
+import { type Operations } from './types.js';
+declare const useOperations: <T = Operations>(signalName: string) => T;
 export default useOperations;

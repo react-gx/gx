@@ -1,8 +1,8 @@
 import {
   AsyncActionStatuses,
-  CreateAsyncActionProp,
-  CreateAsyncActionReturnType,
-} from "./types.js";
+  type CreateAsyncActionProp,
+  type CreateAsyncActionReturnType
+} from './types.js'
 
 /**
  * This function create an async action with different statuses
@@ -16,8 +16,8 @@ const createAsyncAction = (
     pending: AsyncActionStatuses.PENDING,
     fulfilled: AsyncActionStatuses.FULFILLED,
     rejected: AsyncActionStatuses.REJECTED,
-    handler,
-  };
-};
+    handler
+  }
+}
 
-export default createAsyncAction;
+export default createAsyncAction

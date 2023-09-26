@@ -47,7 +47,7 @@ class BuilderCase {
     case(status, handler) {
         this._cases.push({
             status,
-            handler,
+            handler
         });
         return this;
     }

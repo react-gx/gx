@@ -1,27 +1,27 @@
-import { useContext, useMemo } from "react";
-import GXContext from "../contexts/index.js";
+import { useContext, useMemo } from 'react'
+import GXContext from '../contexts/index.js'
 
 const useSignal = <T = any>(signalName: string) => {
-  const { signals } = useContext(GXContext);
-  const memoizedSignals = useMemo(() => signals, [signals]);
+  const { signals } = useContext(GXContext)
+  const memoizedSignals = useMemo(() => signals, [signals])
 
   /**
    * Get state of a signal base on its name
-   * @param signalName 
-   * @returns 
+   * @param signalName
+   * @returns
    */
   const handleGetSignalState = (signalName: string): T => {
-    const signal = memoizedSignals.find(signal => signal.name === signalName);
+    const signal = memoizedSignals.find(signal => signal.name === signalName)
 
     if (signal) {
-      return signal.state;
+      return signal.state
     }
 
     // Throw error if signal not found
-    throw new Error(`Signal ${signalName} not found`);
+    throw new Error(`Signal ${signalName} not found`)
   }
 
-  return handleGetSignalState(signalName);
-};
+  return handleGetSignalState(signalName)
+}
 
-export default useSignal;
+export default useSignal

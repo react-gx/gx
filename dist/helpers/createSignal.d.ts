@@ -1,5 +1,5 @@
-import { CreateSignalOptionType } from "./types.js";
-import { GXActionType, GXAsyncActionType, GXOperationType } from "../contexts/types.js";
+import { type CreateSignalOptionType } from './types.js';
+import { type GXActionType, type GXAsyncActionType, type GXOperationType } from '../contexts/types.js';
 /**
  * Create a signal with a state and actions for managing this state
  * @param options
