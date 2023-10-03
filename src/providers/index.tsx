@@ -62,7 +62,7 @@ export default function GXProvider({ children, store }: GXProviderProps) {
       payload: signal.state,
     });
 
-    return signal.state;
+    return signal.state
   }, []);
 
   // Context value

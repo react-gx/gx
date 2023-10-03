@@ -21,14 +21,18 @@ const useAsyncActions = (signalName, ...actions) => {
     }
     // Get Global Context
     const { signals, asyncDispatch } = (0, react_1.useContext)(contexts_1.default);
+    // Async action callback
     const asyncActionCallback = (0, react_1.useCallback)((action, payload) => __awaiter(void 0, void 0, void 0, function* () {
+        // Dispatch pending action
         asyncDispatch({
             type: action.type,
             isAsync: true,
             status: types_1.AsyncActionStatuses.PENDING,
         });
         try {
+            // Execute async action
             const response = yield action.steps.asyncAction.handler(payload);
+            // Dispatch fulfilled action
             const data = asyncDispatch({
                 type: action.type,
                 isAsync: true,
@@ -41,6 +45,7 @@ const useAsyncActions = (signalName, ...actions) => {
             };
         }
         catch (error) {
+            // Dispatch rejected action
             const data = asyncDispatch({
                 type: action.type,
                 isAsync: true,
@@ -61,7 +66,6 @@ const useAsyncActions = (signalName, ...actions) => {
      * @returns
      */
     const handleGetAsyncActions = (signalName) => {
-        console.log("handleGetAsyncActions");
         const signal = signals.find((signal) => signal.name === signalName);
         if (signal) {
             if (!actions || actions.length === 0)
@@ -80,7 +84,11 @@ const useAsyncActions = (signalName, ...actions) => {
         else
             throw new Error(`Signal ${signalName} not found`);
     };
-    const asyncActions = (0, react_1.useMemo)(() => {
+    /**
+     * Format async actions
+     * @returns
+     */
+    const handleFormatAsyncActions = () => {
         // Get actions
         const nonFormattedActions = handleGetAsyncActions(signalName);
         // Formatted actions
@@ -95,50 +103,8 @@ const useAsyncActions = (signalName, ...actions) => {
             ];
         });
         return Object.fromEntries(formattedActions);
-        // for (const action of nonFormattedActions) {
-        //   // Get action name
-        //   const actionName = action.type.split("/")[1];
-        //   console.log("OUiiiiiiiiiii");
-        //   formattedActions[actionName] = async (payload?: any) => {
-        //     console.log("dedannnnnnnnnns");
-        //     asyncDispatch({
-        //       type: action.type,
-        //       isAsync: true,
-        //       status: AsyncActionStatuses.PENDING,
-        //     });
-        //     try {
-        //       const response = await (
-        //         action.steps as BuilderCase<any>
-        //       ).asyncAction.handler(payload);
-        //       const data = asyncDispatch({
-        //         type: action.type,
-        //         isAsync: true,
-        //         status: AsyncActionStatuses.FULFILLED,
-        //         payload: response,
-        //       });
-        //       console.log("yoooooooooo");
-        //       return {
-        //         data,
-        //         status: AsyncActionStatuses.FULFILLED,
-        //       };
-        //     } catch (error) {
-        //       const data = asyncDispatch({
-        //         type: action.type,
-        //         isAsync: true,
-        //         status: AsyncActionStatuses.REJECTED,
-        //         payload: error,
-        //       });
-        //       return {
-        //         data,
-        //         error,
-        //         status: AsyncActionStatuses.REJECTED,
-        //       };
-        //     }
-        //   };
-        // }
-        // return formattedActions;
-    }, []);
-    return asyncActions;
+    };
+    return handleFormatAsyncActions();
 };
 exports.default = useAsyncActions;
 //# sourceMappingURL=useAsyncActions.js.map
