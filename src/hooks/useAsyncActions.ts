@@ -1,11 +1,18 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { type AsyncActions } from "./types";
 import GXContext from "../contexts";
 import { type GXAsyncActionType } from "../contexts/types";
 import { AsyncActionStatuses } from "../helpers/types";
 import { BuilderCase } from "../interfaces/builderCase";
 
-const useAsyncActions = <T, P = AsyncActions<T>>(
+const useAsyncActions = <T, P = AsyncActions<any>>(
   signalName: string,
   ...actions: string[]
 ) => {
@@ -18,9 +25,25 @@ const useAsyncActions = <T, P = AsyncActions<T>>(
   // Get Global Context
   const { signals, asyncDispatch } = useContext(GXContext);
 
+  // Refs
+  // Define a ref to block the execution of async action callback twice
+  const isAsyncActionCallbackRunning = useRef<{[key: string]: Boolean}>({});
+
   // Async action callback
-  const asyncActionCallback = useCallback(
+  const asyncActionCallback = useRef(
     async (action: GXAsyncActionType<T>, payload?: any) => {
+      // Prevent the execution of async action callback twice
+      if (isAsyncActionCallbackRunning.current[action.type])
+        return new Promise((resolve) => {
+          resolve({
+            status: AsyncActionStatuses.PENDING,
+            data: null,
+          });
+        });
+
+      // Set the ref to true
+      isAsyncActionCallbackRunning.current[action.type] = true;
+
       // Dispatch pending action
       asyncDispatch({
         type: action.type,
@@ -60,9 +83,11 @@ const useAsyncActions = <T, P = AsyncActions<T>>(
           error,
           status: AsyncActionStatuses.REJECTED,
         };
+      } finally {
+        // Set the ref to false
+        isAsyncActionCallbackRunning.current[action.type] = false;
       }
-    },
-    []
+    }
   );
 
   // Some handlers
@@ -111,7 +136,7 @@ const useAsyncActions = <T, P = AsyncActions<T>>(
       return [
         actionName,
         async (payload?: any) => {
-          return asyncActionCallback(action, payload);
+          return asyncActionCallback.current(action, payload);
         },
       ];
     });
