@@ -1,6 +1,6 @@
 import GXProvider from "./providers/index.js";
 import { AsyncActionStatuses } from "./helpers/types.js";
-import { type AsyncActionReturn } from "./helpers/types.js";
+import { type AsyncActionResponse } from "./helpers/types.js";
 import createSignal from "./helpers/createSignal.js";
 import createStore from "./helpers/createStore.js";
 import createAsyncAction from "./helpers/createAsyncAction.js";
@@ -11,4 +11,4 @@ import useAllSignals from "./hooks/useAllSignals.js";
 import useSignal from "./hooks/useSignal.js";
 import useOperations from "./hooks/useOperations.js";
 export default GXProvider;
-export { createSignal, createStore, createAsyncAction, useAction, useActions, useAsyncActions, useAllSignals, useSignal, useOperations, AsyncActionStatuses, AsyncActionReturn };
+export { createSignal, createStore, createAsyncAction, useAction, useActions, useAsyncActions, useAllSignals, useSignal, useOperations, AsyncActionStatuses, AsyncActionResponse };

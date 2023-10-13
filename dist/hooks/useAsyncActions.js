@@ -21,6 +21,13 @@ const useAsyncActions = (signalName, ...actions) => {
     }
     // Get Global Context
     const { signals, asyncDispatch } = (0, react_1.useContext)(contexts_1.default);
+    const state = (0, react_1.useMemo)(() => {
+        const signal = signals.find((signal) => signal.name === signalName);
+        if (signal)
+            return signal.state;
+        else
+            throw new Error(`Signal ${signalName} not found`);
+    }, [signals]);
     // Refs
     // Define a ref to block the execution of async action callback twice
     const isAsyncActionCallbackRunning = (0, react_1.useRef)({});
@@ -31,6 +38,8 @@ const useAsyncActions = (signalName, ...actions) => {
             return new Promise((resolve) => {
                 resolve({
                     status: types_1.AsyncActionStatuses.PENDING,
+                    state,
+                    error: null,
                     data: null,
                 });
             });
@@ -53,7 +62,9 @@ const useAsyncActions = (signalName, ...actions) => {
                 payload: response,
             });
             return {
-                data,
+                state: data,
+                data: response,
+                error: null,
                 status: types_1.AsyncActionStatuses.FULFILLED,
             };
         }
@@ -66,8 +77,9 @@ const useAsyncActions = (signalName, ...actions) => {
                 payload: error,
             });
             return {
-                data,
-                error,
+                state: data,
+                data: null,
+                error: new Error(error),
                 status: types_1.AsyncActionStatuses.REJECTED,
             };
         }
