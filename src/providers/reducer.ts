@@ -25,7 +25,6 @@ const gxReducer = (
             }
           }
         } else {
-          console.log("youpiiiiiiiiii")
           state = action.payload
         }
       }
