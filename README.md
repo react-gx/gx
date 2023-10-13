@@ -34,7 +34,11 @@ yarn add @dilane3/gx
 
 ## Prerequisites
 
-This library doesn't work properly in strict mode. So to avoid some issues, please disable strict mode in your react application first before using it.
+```bash
+Since version `1.4.0` of `gx`, you can use it with `strict mode` enabled.
+```
+
+But, if you are using a version below `1.4.0`, you have to disable `strict mode` in your react application.
 
 ### Disabling strict mode on React
 
@@ -99,7 +103,13 @@ For handle it, there is a special `createSignal` function for this case.
 
 **Actions** represent functions that act to the state and make it changing over the time.
 
-Your have to specify these `actions` when you create yours `signals`.
+You have to specify these `actions` when you create yours `signals`.
+
+```txt
+Since version `1.4.0` of `gx`, you can use `async` actions. 
+```
+
+You can read more about it on the [documentation](https://gx.dilane3.com/docs/guide/async-actions)
 
 ### 3. Store
 
@@ -145,6 +155,8 @@ const counterSignal = createSignal({
 
 export default counterSignal;
 ```
+
+If you want to use `async` actions, you can learn more about it on the [documentation](https://gx.dilane3.com/docs/guide/async-actions)
 
 ### Third step: Creating your store.
 
