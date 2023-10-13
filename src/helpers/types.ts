@@ -56,8 +56,10 @@ export interface CreateAsyncActionReturnType {
   handler: CreateAsyncActionProp;
 }
 
-export type AsyncActionReturn<T = null> = Promise<{
+export type AsyncActionResponse<P = any, T = null> = Promise<{
+  state: P;
   data: T;
+  error: Error | null;
   status: AsyncActionStatusesType;
 }>;
 

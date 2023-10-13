@@ -19,7 +19,6 @@ const gxReducer = (signals, action) => {
                 }
             }
             else {
-                console.log("youpiiiiiiiiii");
                 state = action.payload;
             }
         }

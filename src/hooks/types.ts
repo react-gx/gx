@@ -3,7 +3,9 @@ import { type AsyncActionStatusesType } from '../helpers/types'
 export type Actions = Record<string, (payload?: any) => void>
 
 export type AsyncActions<T> = Record<string, (payload?: any) => Promise<{
-  data: T
+  state: T,
+  data: any | null,
+  error: Error | null,
   status: AsyncActionStatusesType
 }>>
 

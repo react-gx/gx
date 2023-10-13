@@ -12,7 +12,7 @@ import { type GXAsyncActionType } from "../contexts/types";
 import { AsyncActionStatuses } from "../helpers/types";
 import { BuilderCase } from "../interfaces/builderCase";
 
-const useAsyncActions = <T, P = AsyncActions<any>>(
+const useAsyncActions = <P = AsyncActions<any>>(
   signalName: string,
   ...actions: string[]
 ) => {
@@ -25,18 +25,31 @@ const useAsyncActions = <T, P = AsyncActions<any>>(
   // Get Global Context
   const { signals, asyncDispatch } = useContext(GXContext);
 
+  // Get state from signals
+  // Extract type from P generic type
+  type StateType = P extends AsyncActions<infer U> ? U : any;
+
+  const state = useMemo<StateType>(() => {
+    const signal = signals.find((signal) => signal.name === signalName);
+
+    if (signal) return signal.state;
+    else throw new Error(`Signal ${signalName} not found`);
+  }, [signals]);
+
   // Refs
   // Define a ref to block the execution of async action callback twice
-  const isAsyncActionCallbackRunning = useRef<{[key: string]: Boolean}>({});
+  const isAsyncActionCallbackRunning = useRef<{ [key: string]: Boolean }>({});
 
   // Async action callback
   const asyncActionCallback = useRef(
-    async (action: GXAsyncActionType<T>, payload?: any) => {
+    async (action: GXAsyncActionType<StateType>, payload?: any) => {
       // Prevent the execution of async action callback twice
       if (isAsyncActionCallbackRunning.current[action.type])
         return new Promise((resolve) => {
           resolve({
             status: AsyncActionStatuses.PENDING,
+            state,
+            error: null,
             data: null,
           });
         });
@@ -66,7 +79,9 @@ const useAsyncActions = <T, P = AsyncActions<any>>(
         });
 
         return {
-          data,
+          state: data,
+          data: response,
+          error: null,
           status: AsyncActionStatuses.FULFILLED,
         };
       } catch (error) {
@@ -79,8 +94,9 @@ const useAsyncActions = <T, P = AsyncActions<any>>(
         });
 
         return {
-          data,
-          error,
+          state: data,
+          data: null,
+          error: new Error(error),
           status: AsyncActionStatuses.REJECTED,
         };
       } finally {
@@ -103,7 +119,7 @@ const useAsyncActions = <T, P = AsyncActions<any>>(
     if (signal) {
       if (!actions || actions.length === 0) return signal.asyncActions || [];
 
-      const filteredActions: Array<GXAsyncActionType<T>> = [];
+      const filteredActions: Array<GXAsyncActionType<StateType>> = [];
 
       for (const action of actions) {
         const actionName = `${signalName}/${action}`;
