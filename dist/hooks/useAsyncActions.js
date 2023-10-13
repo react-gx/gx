@@ -21,8 +21,21 @@ const useAsyncActions = (signalName, ...actions) => {
     }
     // Get Global Context
     const { signals, asyncDispatch } = (0, react_1.useContext)(contexts_1.default);
+    // Refs
+    // Define a ref to block the execution of async action callback twice
+    const isAsyncActionCallbackRunning = (0, react_1.useRef)({});
     // Async action callback
-    const asyncActionCallback = (0, react_1.useCallback)((action, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const asyncActionCallback = (0, react_1.useRef)((action, payload) => __awaiter(void 0, void 0, void 0, function* () {
+        // Prevent the execution of async action callback twice
+        if (isAsyncActionCallbackRunning.current[action.type])
+            return new Promise((resolve) => {
+                resolve({
+                    status: types_1.AsyncActionStatuses.PENDING,
+                    data: null,
+                });
+            });
+        // Set the ref to true
+        isAsyncActionCallbackRunning.current[action.type] = true;
         // Dispatch pending action
         asyncDispatch({
             type: action.type,
@@ -58,7 +71,11 @@ const useAsyncActions = (signalName, ...actions) => {
                 status: types_1.AsyncActionStatuses.REJECTED,
             };
         }
-    }), []);
+        finally {
+            // Set the ref to false
+            isAsyncActionCallbackRunning.current[action.type] = false;
+        }
+    }));
     // Some handlers
     /**
      * Get async actions of a signal
@@ -98,7 +115,7 @@ const useAsyncActions = (signalName, ...actions) => {
             return [
                 actionName,
                 (payload) => __awaiter(void 0, void 0, void 0, function* () {
-                    return asyncActionCallback(action, payload);
+                    return asyncActionCallback.current(action, payload);
                 }),
             ];
         });

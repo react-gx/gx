@@ -11,17 +11,16 @@ const builderCase_js_1 = require("./builderCase.js");
  * the async action steps.
  */
 class Builder {
-    constructor() {
-        this._builderCase = new builderCase_js_1.BuilderCase();
-    }
     /**
      * This method takes an async action object and assign it to the builder case instance
      * @param asyncAction An async action object
      * @returns IBuilderCase
      */
     use(asyncAction) {
-        this._builderCase.asyncAction = asyncAction;
-        return this._builderCase;
+        const builderCase = new builderCase_js_1.BuilderCase();
+        builderCase.asyncAction = asyncAction;
+        builderCase.cases = [];
+        return builderCase;
     }
 }
 exports.Builder = Builder;

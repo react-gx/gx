@@ -15,20 +15,17 @@ export default interface IBuilder<T, P = any> {
  * the async action steps.
  */
 export class Builder<T, P = any> implements IBuilder<T, P> {
-  private readonly _builderCase: BuilderCase<T, P>;
-
-  constructor() {
-    this._builderCase = new BuilderCase();
-  }
-
   /**
    * This method takes an async action object and assign it to the builder case instance
    * @param asyncAction An async action object
    * @returns IBuilderCase
    */
   use(asyncAction: CreateAsyncActionReturnType): IBuilderCase<T, P> {
-    this._builderCase.asyncAction = asyncAction;
+    const builderCase = new BuilderCase<T, P>();
 
-    return this._builderCase;
+    builderCase.asyncAction = asyncAction;
+    builderCase.cases = [];
+
+    return builderCase;
   }
 }

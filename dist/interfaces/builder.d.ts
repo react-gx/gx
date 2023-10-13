@@ -12,8 +12,6 @@ export default interface IBuilder<T, P = any> {
  * the async action steps.
  */
 export declare class Builder<T, P = any> implements IBuilder<T, P> {
-    private readonly _builderCase;
-    constructor();
     /**
      * This method takes an async action object and assign it to the builder case instance
      * @param asyncAction An async action object

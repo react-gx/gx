@@ -4,6 +4,9 @@ import GXProvider from "./providers/index.js";
 // Constants
 import { AsyncActionStatuses } from "./helpers/types.js";
 
+// Types
+import { type AsyncActionReturn } from "./helpers/types.js";
+
 // Helpers functions
 import createSignal from "./helpers/createSignal.js";
 import createStore from "./helpers/createStore.js";
@@ -30,6 +33,7 @@ export {
   useSignal,
   useOperations,
   AsyncActionStatuses,
+  AsyncActionReturn
 };
 
 // "build": "tsc && npx babel dist --out-dir cjs --extensions '.js' --source-maps inline --copy-files",

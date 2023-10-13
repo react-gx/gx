@@ -1,6 +1,6 @@
-import { type GXSignalType } from '../contexts/types.js';
-import { type Builder } from '../interfaces/builder.js';
-import type IBuilderCase from '../interfaces/builderCase.js';
+import { type GXSignalType } from "../contexts/types.js";
+import { type Builder } from "../interfaces/builder.js";
+import type IBuilderCase from "../interfaces/builderCase.js";
 /**
  * Type of the create signal option function
  */
@@ -36,6 +36,10 @@ export interface CreateAsyncActionReturnType {
     rejected: AsyncActionStatusesType;
     handler: CreateAsyncActionProp;
 }
+export type AsyncActionReturn<T = null> = Promise<{
+    data: T;
+    status: AsyncActionStatusesType;
+}>;
 export declare const AsyncActionStatuses: {
     readonly PENDING: "PENDING";
     readonly FULFILLED: "FULFILLED";
