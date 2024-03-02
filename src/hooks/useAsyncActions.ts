@@ -6,11 +6,11 @@ import {
   useRef,
   useState,
 } from "react";
-import { type AsyncActions } from "./types";
-import GXContext from "../contexts";
-import { type GXAsyncActionType } from "../contexts/types";
-import { AsyncActionStatuses } from "../helpers/types";
-import { BuilderCase } from "../interfaces/builderCase";
+import { type AsyncActions } from "./types.js";
+import GXContext from "../contexts/index.js";
+import { type GXAsyncActionType } from "../contexts/types.js";
+import { AsyncActionStatuses } from "../helpers/types.js";
+import { BuilderCase } from "../interfaces/builderCase.js";
 
 const useAsyncActions = <P = AsyncActions<any>>(
   signalName: string,

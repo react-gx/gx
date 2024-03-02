@@ -1,4 +1,4 @@
-import { type AsyncActionStatusesType } from '../helpers/types'
+import { type AsyncActionStatusesType } from '../helpers/types.js'
 
 export type Actions = Record<string, (payload?: any) => void>
 

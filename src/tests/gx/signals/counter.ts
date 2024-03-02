@@ -1,4 +1,4 @@
-import createSignal from "../../../helpers/createSignal";
+import createSignal from "../../../helpers/createSignal.js";
 
 const counterSignal = createSignal({
   name: "counter",

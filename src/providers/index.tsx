@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useCallback, useReducer, useTransition } from "react";
+import React, { useCallback, useReducer, useTransition } from "react";
 import GXContext from "../contexts/index.js";
 import { type GXAction, type GXProviderProps } from "./types.js";
 import gxReducer from "./reducer.js";
