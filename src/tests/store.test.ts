@@ -1,5 +1,5 @@
-import counterSignal from './gx/signals/counter';
-import store from './gx/store';
+import counterSignal from './gx/signals/counter.js';
+import store from './gx/store/index.js';
 
 test("should create a store containing signals", () => {
   // Expectations

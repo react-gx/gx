@@ -1,4 +1,4 @@
-import counterSignal from "./gx/signals/counter";
+import counterSignal from "./gx/signals/counter.js";
 
 test("should create a signal", () => {
   // Expectations

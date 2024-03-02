@@ -5,7 +5,7 @@ import { type AsyncActionStatusesType, type CreateStoreType } from '../helpers/t
  */
 export interface GXProviderProps {
   // Children component of the GX Provider
-  children: React.ReactElement
+  children: React.ReactNode
 
   // Collection of signals
   store: CreateStoreType
